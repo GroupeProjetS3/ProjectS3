@@ -1,4 +1,4 @@
-Developpeurs :
+Main Contributor :
 COLLET Valentin
 APPERT Kévin
 BOGAERT Axel

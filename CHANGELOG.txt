@@ -1,1 +1,3 @@
-Pour le changelog veuillez vous reportez au dépôt git :
+# Changelog
+
+https://github.com/GroupeProjetS3/ProjectS3
