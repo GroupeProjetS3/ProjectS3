@@ -25,5 +25,3 @@
  --------------------------------------------------------------------------
  */
 
-require_once("./inc/autoload.inc.php");
-ConnectionDB::setConfiguration('mysql:host=mysql;dbname=infs3_prjXX;charset=utf8', '' , '') ;
