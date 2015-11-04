@@ -27,4 +27,4 @@
 
 define('RACINE', dirname(__FILE__));
 include_once (RACINE . "/inc/autoload.function.php");
-
+include_once (RACINE . "/config/config_db.php");

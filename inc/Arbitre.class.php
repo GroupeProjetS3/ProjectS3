@@ -25,12 +25,24 @@
  --------------------------------------------------------------------------
  */
 
-/**
- * Check si une valeur d'un tableau est non null
- * @param $champs Le champs à checker
- * @param $string L'élément du champs à checker
- * @return bool si le champs est utilisable ou non
- */
-function checking($champs,$string){
-    return (isset($champs[$string])&&!empty($champs[$string]));
+require_once("autoload.inc.php");
+
+class Arbitre extends HostUser{
+
+}
+
+class ArbitreLigne extends Arbitre{
+
+}
+
+class ArbitreFilet extends Arbitre{
+
+}
+
+class ArbitreChaise extends Arbitre{
+
+}
+
+class Ramasseur extends Arbitre{
+
 }
