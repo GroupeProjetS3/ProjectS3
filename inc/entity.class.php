@@ -24,17 +24,23 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+abstract class Entity{
+    private $id = null;
+    private $name = null;
 
-/**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
-
+    /**
+     * @return int id
+     */
+    public function getId(){
+        return $this->id;
     }
-});
+
+    /**
+     * @return String name
+     */
+    public function getName(){
+        return $this->name;
+    }
+
+    public abstract static function createFromId($id);
+}

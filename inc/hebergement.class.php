@@ -24,17 +24,9 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+class Hebergement extends entity{
 
-/**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
+    public static function createFromId($id){
 
     }
-});
+}

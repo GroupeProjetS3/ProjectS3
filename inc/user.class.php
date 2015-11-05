@@ -28,43 +28,35 @@
 require_once("autoload.function.php");
 require_once("../config/config_db.php");
 
-class User {
-    private $idUser = null;
-    private $login = null;
-    private $nom = null;
-    private $prenom = null;
+class User extends entity{
+    private $lastName = null;
+    private $firstName = null;
     private $mail = null;
     private $typeUser = null;
 
-    /*
-     * retourne l'id
-     */
-    public function getId(){
-        return $this->idUser;
-    }
-
-     /*
-     * retourne le nom
+    /**
+     * @return String nom
      */
      public function getLastName(){
-        return $this->nom;
-     }
-     /*
-     * retourne le prenom
-     */
-     public function getFirstName(){
-      return $this->prenom;
+        return $this->lastName;
      }
 
-     /*
-     * retourne le mail
+    /**
+     * @return String prenom
+     */
+     public function getFirstName(){
+      return $this->firstName;
+     }
+
+    /**
+     * @return String mail
      */
      public function getMail(){
       return $this->mail;
      }
 
-    /*
-     * retourne le type
+    /**
+     * @return String type
      */
     public function getType(){
         return $this->typeUser;
@@ -106,15 +98,29 @@ class User {
         return $trueUser;
     }
 
+    public static function createFromId($id){
+        $connection = ConnectionDB::GetInstance();
+        $stmt = $connection->prepare(<<<SQL
+                    SELECT *
+                    FROM Membre
+                    WHERE id = ?
+SQL
+        );
+        $stmt->execute(array($id));
+        $stmt->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
+        $user = $stmt->fetch();
+
+        $user = self::building($user);
+    }
+
 
     ///////////////////////////////////////////// Authentification Part ///////////////////////////////////////////
 
 
      /**
       * cree une instance d'User
-      * @param $pseudo pseudo de l'utilisateur
-      * @param $mdp mot de passe de l'utilisateur
-      * @return User instance de user (dépend du type d'user)
+      * @param $crypt String mot de passe crypté de l'utilisateur
+      * @return User instance de user (depend du type d'user)
       * @throws Exception si le pseudo ou mot de passe est invalide
       */
      public static function createFromAuth($crypt){

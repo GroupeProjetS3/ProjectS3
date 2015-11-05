@@ -25,16 +25,23 @@
  --------------------------------------------------------------------------
  */
 
+
 /**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
+ * Class Calendrier
+ * Le calendrier à partir des informations du tournoi,
+ * se chargera de l'affichage de celle-ci
+ * se chargera aussi de la création des matchs
+ */
+class Calendrier extends entity{
+    private $matchs = null;
+    private $tournoi = null;
+
+    public static function createFromId($id){}
+
+    /**
+     * @param $tournoi Tournoi le tournoi pour lequel le calendrier est généré
+     */
+    public function __construct($tournoi){
 
     }
-});
+}

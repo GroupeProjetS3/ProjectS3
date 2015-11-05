@@ -43,7 +43,7 @@ final class ConnectionDB {
    /**
     * Point d'accès à l'instance de connexion
     * @throws Exception si la configuration n'a pas été effectuée.
-    * @return ConnectionDB instance unique
+    * @return PDO instance unique
     */
    public static function getInstance() {
       if (is_null(self::$_instance)) {

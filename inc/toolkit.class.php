@@ -27,8 +27,8 @@
 
 /**
  * Check si une valeur d'un tableau est non null
- * @param $champs Le champs à checker
- * @param $string L'élément du champs à checker
+ * @param $champs Array le champs à checker
+ * @param $string String l'élément du champs à checker
  * @return bool si le champs est utilisable ou non
  */
 function checking($champs,$string){

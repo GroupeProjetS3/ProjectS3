@@ -26,15 +26,17 @@
  */
 
 /**
- * Chargement des classes
+ * Class Competition
+ * La compétion est une part d'un tournoi
+ * Celle ci possède une catégorie spécifique (simple, double)
+ * Elle contiendra les informations necessaire à son déroulement
  *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
+ */
+class Competition extends entity{
+    private $categorie = null;
+    private $joueurs = array();
+    private $Tree = null;
+    private $Tournoi = null;
 
-    }
-});
+    public static function createFromId($id){}
+}

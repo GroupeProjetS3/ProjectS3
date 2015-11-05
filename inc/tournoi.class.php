@@ -26,15 +26,13 @@
  */
 
 /**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
+ * Class Tournoi
+ */
+class Tournoi extends entity{
+    private $competition = array();
+    private $terrains = array();
+    private $hebergement = array();
+    private $calendier = null;
 
-    }
-});
+    public static function createFromId($id){}
+}

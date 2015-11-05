@@ -24,17 +24,17 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+class terrain extends entity{
+    private $trainingField = false;
 
-/**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
 
+    public function isTrainingField(){
+        return $this->trainingField;
     }
-});
+
+    public function setTrainingField($boolean){
+        $this->trainingField = $boolean;
+    }
+
+    public static function createFromId($id){}
+}

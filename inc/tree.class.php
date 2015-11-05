@@ -26,15 +26,10 @@
  */
 
 /**
- * Chargement des classes
- *
- * @param $class : la classe à charger
-**/
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . substr($class) . '.php';
-    // si le fichier existe, le require
-    if (file_exists($file)) {
-        require $file;
-
-    }
-});
+ * Class Tree
+ * Celui-ci généré pour une compétition définira les matchs qui seront effectués
+ * celui ci gardera aussi en mémoire les résultats de ceux-ci
+ */
+class Tree{
+    
+}
