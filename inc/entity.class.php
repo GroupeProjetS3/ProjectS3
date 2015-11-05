@@ -25,8 +25,8 @@
  --------------------------------------------------------------------------
  */
 abstract class Entity{
-    private $id = null;
-    private $name = null;
+    protected $id = null;
+    protected $name = null;
 
     /**
      * @return int id

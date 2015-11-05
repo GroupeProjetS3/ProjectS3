@@ -35,38 +35,48 @@ class User extends entity{
     private $typeUser = null;
 
     /**
-     * @return String nom
+     * Retourne le nom de l'utilisateur
+     * @return String son nom
      */
      public function getLastName(){
         return $this->lastName;
      }
 
     /**
-     * @return String prenom
+     * Retourne le prénom de l'utilisateur
+     * @return String son prénom
      */
      public function getFirstName(){
       return $this->firstName;
      }
 
     /**
-     * @return String mail
+     * Retourne l'adresse email de l'utilisateur
+     * @return String son email
      */
      public function getMail(){
       return $this->mail;
      }
 
     /**
-     * @return String type
+     * Retourne le type de l'utilisateur
+     * @return String son type
      */
     public function getType(){
         return $this->typeUser;
     }
 
      /**
-      * pour ne pas cree d'instance de User
+      * pas de création de user
       */
      private function __construct(){}
 
+    /**
+     * Retourne une instance d'utilisateur à partir d'un utilisateur
+     * en fonction de son type
+     * @param $user un utilisateur
+     * @return ArbitreChaise|ArbitreFilet|Hebergeur|Joueur|Organisateur|Staff
+     */
     public static function building($user){
         $trueUser = $user;
         switch($user->typeUser){
@@ -98,11 +108,15 @@ class User extends entity{
         return $trueUser;
     }
 
+    /**
+     * Instancie un utilisateur en fonction d'un identifiant
+     * @param $id l'identifiant de l'utilisateur
+     */
     public static function createFromId($id){
         $connection = ConnectionDB::GetInstance();
         $stmt = $connection->prepare(<<<SQL
                     SELECT *
-                    FROM Membre
+                    FROM User
                     WHERE id = ?
 SQL
         );
@@ -112,10 +126,11 @@ SQL
 
         $user = self::building($user);
     }
-
-
-    ///////////////////////////////////////////// Authentification Part ///////////////////////////////////////////
-
+/*
+ -------------------------------------------------------------------------
+    A partir d'ici se trouvent les méthodes en rapport avec la BD
+ -------------------------------------------------------------------------
+*/
 
      /**
       * cree une instance d'User
@@ -128,17 +143,14 @@ SQL
           $connection = ConnectionDB::GetInstance();
           $stmt = $connection->prepare(<<<SQL
                     SELECT *
-                    FROM Membre
+                    FROM User
                     WHERE SHA1(concat(SHA1(pseudo), :challenge, password))=:crypt;
 SQL
         );
          $stmt->execute(array("challenge" => $_SESSION['challenge'], "crypt" => $crypt));
          $stmt->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
          $user = $stmt->fetch();
-
          $user = self::building($user);
-
-
          unset($_SESSION['challenge']);
          if($user!==false){
              self::startSession();
@@ -204,10 +216,14 @@ SQL
        return null;
      }
 
-
+    /**
+     * Retourne un challenging aléatoire
+     * @return string
+     * @throws Exception
+     */
      public static function Challenging(){
       $res = '';
-      for($i=0;$i<256;$i++){
+      for($i=0;$i<32;$i++){
        $char = rand(0,2);
        switch($char){
         case 0:

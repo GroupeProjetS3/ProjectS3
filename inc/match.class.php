@@ -27,6 +27,7 @@
 class match extends entity{
     private $terrain = null;
     private $creneau = null;
+    private $competition = null;
 
     public static function createFromId($id){}
 }
