@@ -25,7 +25,7 @@
  --------------------------------------------------------------------------
  */
 
-require_once("autoload.inc.php");
+require_once("autoload.function.php");
 
 class Hebergeur extends User{
 

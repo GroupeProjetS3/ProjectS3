@@ -1,4 +1,5 @@
 Main Contributor :
-COLLET Valentin https://github.com/Letargie
-APPERT Kévin https://github.com/Aliaegon
-BOGAERT Axel https://github.com/IdiotStyle
+COLLET Valentin <https://github.com/Letargie>
+APPERT Kévin <https://github.com/Aliaegon>
+BOGAERT Axel <https://github.com/IdiotStyle>
+FIEVET Corentin <https://github.com/cofievet>

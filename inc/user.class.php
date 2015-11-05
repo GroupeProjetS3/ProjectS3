@@ -25,8 +25,8 @@
  --------------------------------------------------------------------------
  */
 
-require_once("autoload.inc.php");
-require_once("./config/config_db.php");
+require_once("autoload.function.php");
+require_once("../config/config_db.php");
 
 class User {
     private $idUser = null;
