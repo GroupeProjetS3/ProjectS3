@@ -33,6 +33,26 @@ class Tournoi extends entity{
     private $terrains = array();
     private $hebergement = array();
     private $calendier = null;
+    private $configuration = null;
+
+    public function __construct(){
+
+    }
 
     public static function createFromId($id){}
+
+    /**
+     * @return array Competition
+     */
+    public function getCompetitions(){
+        return $this->competition;
+    }
+
+    public function getCreneaux(){
+        return $this->competition;
+    }
+
+    public function getTerrains(){
+        return $this->terrains;
+    }
 }

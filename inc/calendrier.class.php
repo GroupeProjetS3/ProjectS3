@@ -33,15 +33,94 @@
  * se chargera aussi de la création des matchs
  */
 class Calendrier extends entity{
-    private $matchs = null;
+    private $matchs = array();
     private $tournoi = null;
+    private $Tree = null;
 
     public static function createFromId($id){}
 
     /**
-     * @param $tournoi Tournoi le tournoi pour lequel le calendrier est généré
+     * @param $tournoi Tournoi
      */
-    public function __construct($tournoi){
+    public static function generateCalendar($tournoi){
+        $calendrier = new Calendrier($tournoi);
+        $arbres = array();
+        foreach($tournoi->getCompetitions() as $competition){
+            array_push($arbres, $competition->getTree());
+        }
+        $Tree = $TreeForMatchs = self::getTreeForMatchs($arbres);
+        $creneaux = $tournoi->getCreneaux();
+        foreach($TreeForMatchs as $step){
+            while(count($step) != 0){
+                foreach($creneaux as $horaire){
+                    foreach($tournoi->getTerrains() as $terrain) {
+                        $matchCanBeDone = false;
+                        $try = 0;
+                        while(
+                        !$matchCanBeDone =
+                            self::MatchCanBeDone($calendrier->getMatchs(),
+                            $match = new Match($terrain,new creneau($horaire[0],
+                            $horaire[1]), $step[0]))
+                        || $try > 25) {
+                            array_push($step, $step[0]);
+                            unset($step[0]);
+                            $try++;
+                        }
+                        $calendrier->addMatch($match);
+                    }
+                    unset($step[0]);
+                }
+            }
+        }
 
+    }
+
+    public function updateCalendar(){
+
+    }
+
+    public static function getTreeForMatchs($arbres){
+        $Tree = array();
+        foreach ($arbres as $arbre) { // Parcours des différents arbres
+            for ($i = 0; $i < count($arbre); $i++) { // Pour chaque Etape
+                for ($j = 0; $j < count($arbre[$i]); $j += 2) { //Pour chaque couple de joueurs
+                    array_push($Tree[$i][$j], $arbre[$i][$j]);
+                    array_push($Tree[$i][$j], $arbre[$i][$j + 1]);
+                }
+            }
+        }
+        foreach ($Tree as $step) {
+            shuffle($step);
+        }
+        return $Tree;
+    }
+
+    public function getMatchs(){
+        return $this->matchs;
+    }
+
+    public function addMatch($match){
+        array_push($this->matchs, $match);
+    }
+
+    /**
+     * @param $matchs array
+     * @param $matchTested array
+     * @return bool
+     */
+    public static function matchCanBeDone($matchs, $matchTested){
+
+        foreach($matchs as $match){
+            if($match->getCreneau().equals($matchTested.getCreneau())) {
+                foreach ($match->getJoueursId() as $joueurId) {
+                    foreach ($matchTested->getJoueursId() as $joueurTested) {
+                        if ($joueurId == $joueurTested) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

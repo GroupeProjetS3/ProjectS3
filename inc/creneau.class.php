@@ -34,4 +34,8 @@ class Creneau extends entity{
     private $duree = null;
 
     public static function createFromId($id){}
+
+    public function equals($creneau){
+        return $this->hDeb == $creneau->hDeb && $this->duree = $creneau->duree;
+    }
 }

@@ -45,7 +45,7 @@ class Tree{
     }
 
     /**
-     * @param $phase array() la phase de la compétition
+     * @param $phase int la phase de la compétition
      * (la finale étant la dernière)
      * @param $winnerIndex int index du vainqueur du match
      */

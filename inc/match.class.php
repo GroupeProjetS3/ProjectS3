@@ -27,7 +27,29 @@
 class match extends entity{
     private $terrain = null;
     private $creneau = null;
-    private $competition = null;
+    private $idJoueurs = array();
+
+    public function __construct($terrain, $creneau, $idJoueurs){
+        $this->terrain = $terrain;
+        $this->creneau = $creneau;
+        $this->idJoueurs = $idJoueurs;
+    }
 
     public static function createFromId($id){}
+
+    /**
+     * Le tableau contenant les deux équipes de joueurs (leurs ids)
+     * @return array
+     */
+    public function getJoueursId(){
+        return $this->joueurs;
+    }
+
+    /**
+     * retourne le créneau du match
+     * @return Creneau
+     */
+    public function getCreneau(){
+        return $this->creneau;
+    }
 }
