@@ -32,6 +32,7 @@
 class Creneau extends entity{
     private $hDeb = null;
     private $duree = null;
+    private $jour = null;
 
     public static function createFromId($id){}
 

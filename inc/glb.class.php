@@ -26,33 +26,16 @@
  */
 
 /**
- * Class Tournoi
+ * Class Glb
+ * Classe d'accès aux variables globales de manière sécurisée
  */
-class Tournoi extends entity{
-    private $competition = array();
-    private $terrains = array();
-    private $hebergement = array();
-    private $calendier = null;
-    private $horaires = array();
-
-    public function __construct(){
-
+class Glb{
+    public static function loadConfig(){
+        $GLOBALS["config"] =
+            json_decode(file_get_contents(CONFIG_DIR."/config.json"));
     }
 
-    public static function createFromId($id){}
-
-    /**
-     * @return array Competition
-     */
-    public function getCompetitions(){
-        return $this->competition;
-    }
-
-    public function getHoraires(){
-        return $this->horaires;
-    }
-
-    public function getTerrains(){
-        return $this->terrains;
+    public static function saveConfig(){
+        file_put_contents(CONFIG_DIR."/config.json", $GLOBALS["config"]);
     }
 }

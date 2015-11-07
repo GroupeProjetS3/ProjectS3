@@ -26,7 +26,6 @@
  */
 
 require_once("autoload.function.php");
-require_once("../config/config_db.php");
 
 class User extends entity{
     private $lastName = null;

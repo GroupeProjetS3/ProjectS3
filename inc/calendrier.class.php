@@ -49,7 +49,7 @@ class Calendrier extends entity{
             array_push($arbres, $competition->getTree());
         }
         $Tree = $TreeForMatchs = self::getTreeForMatchs($arbres);
-        $creneaux = $tournoi->getCreneaux();
+        $creneaux = $tournoi->getHoraires();
         foreach($TreeForMatchs as $step){
             while(count($step) != 0){
                 foreach($creneaux as $horaire){
