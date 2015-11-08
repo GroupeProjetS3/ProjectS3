@@ -76,7 +76,7 @@ class Calendrier extends entity{
     }
 
     public function updateCalendar(){
-
+    // TODO sera très compliqué je m'en chargerai plus tard
     }
 
     public static function getTreeForMatchs($arbres){
@@ -123,4 +123,8 @@ class Calendrier extends entity{
         }
         return true;
     }
+
+    public function getTournoi(){}
+
+    public function removeMatch(){}
 }

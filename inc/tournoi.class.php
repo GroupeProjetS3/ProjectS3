@@ -27,6 +27,10 @@
 
 /**
  * Class Tournoi
+ *
+ * Un Tournoi sera créer par un organisateur avec une interface
+ * Celui-ci y définira les horaires d'une quelconques façon qu'il nous reste
+ * à définir
  */
 class Tournoi extends entity{
     private $competition = array();
@@ -35,24 +39,65 @@ class Tournoi extends entity{
     private $calendier = null;
     private $horaires = array();
 
-    public function __construct(){
-
+    /**
+     * @param $horaires array
+     * Constructeur de tournoi
+     */
+    public function __construct($nom, $horaires){
+        $this->name = $nom;
+        $this->horaires = $horaires;
     }
 
+    /**
+     * @param $id
+     * Constructeur à partir d'un identifiant (permet de récupérer les infos
+     * dans la base de données)
+     */
     public static function createFromId($id){}
 
     /**
+     * retourne toute les compétitions constituant le tournoi
      * @return array Competition
      */
     public function getCompetitions(){
         return $this->competition;
     }
 
+    /**
+     * retourne tout les horaires disponible du tournoi
+     * @return array
+     */
     public function getHoraires(){
         return $this->horaires;
     }
 
+    /**
+     * retourne tout les terrains disponibles pour le terrain
+     * @return array Terrain
+     */
     public function getTerrains(){
         return $this->terrains;
     }
+
+    public function addCompetition(){}
+
+    public function addHoraire(){}
+
+    public function addTerrain(){}
+
+    public function addHebergement(){}
+
+    public function removeCompetition(){}
+
+    public function removeHoraire(){}
+
+    public function removeTerrain(){}
+
+    public function getTerrain(){}
+
+    public function getHebergement(){}
+
+    public function getHoraire(){}
+
+    public function getCompetition(){}
 }

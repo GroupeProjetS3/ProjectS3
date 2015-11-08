@@ -52,4 +52,8 @@ class match extends entity{
     public function getCreneau(){
         return $this->creneau;
     }
+
+    public function getCompetition(){
+        //TODO trouver un moyen de le récupérer ici à partir des joueurs/arbitres ou alors autre part dans le calendrier
+    }
 }

@@ -33,6 +33,14 @@ class User extends entity{
     private $mail = null;
     private $typeUser = null;
 
+    public function setMail(){}
+
+    public function setFirstName(){}
+
+    public function setLastName(){}
+
+    public function setTypeUser(){}
+
     /**
      * Retourne le nom de l'utilisateur
      * @return String son nom

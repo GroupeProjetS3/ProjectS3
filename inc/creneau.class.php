@@ -39,4 +39,16 @@ class Creneau extends entity{
     public function equals($creneau){
         return $this->hDeb == $creneau->hDeb && $this->duree = $creneau->duree;
     }
+
+    public function getHDeb(){}
+
+    public function setHDeb(){}
+
+    public function getDuree(){}
+
+    public function setDuree(){}
+
+    public function setJour(){}
+
+    public function getJour(){}
 }

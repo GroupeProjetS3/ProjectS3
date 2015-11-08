@@ -36,11 +36,27 @@ class Competition extends entity{
     private $categorie = null;
     private $joueurs = array();
     private $tree = null;
-    private $Tournoi = null;
+    private $tournoi = null;
+
+    public function __construct($nom, $categorie, $tournoi){
+        $this->name = $nom;
+        $this->categorie = $categorie;
+        $this->tournoi = $tournoi;
+    }
 
     public static function createFromId($id){}
 
     public function getTree(){
         return $this->tree;
     }
+
+    public function getJoueurs(){}
+
+    public function getTournoi(){}
+
+    public function getCategorie(){}
+
+    public function addJoueur(){}
+
+    public function removeJoueur(){}
 }

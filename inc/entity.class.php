@@ -42,5 +42,7 @@ abstract class Entity{
         return $this->name;
     }
 
+    public function setName(){}
+
     public abstract static function createFromId($id);
 }

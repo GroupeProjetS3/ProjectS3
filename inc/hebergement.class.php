@@ -25,8 +25,21 @@
  --------------------------------------------------------------------------
  */
 class Hebergement extends entity{
+    private $nbPlaces;
+    private $hebergeur;
+
+    public function __construct($nom, $nbPlaces, $hebergeur){
+        $this->name = $nom;
+        $this->nbPlaces = $nbPlaces;
+        $this->hebergeur = $hebergeur;
+    }
 
     public static function createFromId($id){
-
     }
+
+    public function getNbPlaces(){}
+
+    public function setNbPlaces(){}
+
+    public function getHebergeur(){}
 }
