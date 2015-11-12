@@ -44,5 +44,5 @@ abstract class Entity{
 
     public function setName(){}
 
-    public abstract static function createFromId($id);
+    public static function createFromId($id){}
 }

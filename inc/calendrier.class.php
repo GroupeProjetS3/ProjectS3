@@ -37,6 +37,8 @@ class Calendrier extends entity{
     private $tournoi = null;
     private $Tree = null;
 
+    public function __construct($tournoi){}
+
     public static function createFromId($id){}
 
     /**
@@ -105,13 +107,13 @@ class Calendrier extends entity{
 
     /**
      * @param $matchs array
-     * @param $matchTested array
+     * @param $matchTested Match
      * @return bool
      */
     public static function matchCanBeDone($matchs, $matchTested){
 
         foreach($matchs as $match){
-            if($match->getCreneau().equals($matchTested.getCreneau())) {
+            if($match->getCreneau()->equals($matchTested.getCreneau())) {
                 foreach ($match->getJoueursId() as $joueurId) {
                     foreach ($matchTested->getJoueursId() as $joueurTested) {
                         if ($joueurId == $joueurTested) {

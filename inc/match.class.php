@@ -42,7 +42,7 @@ class match extends entity{
      * @return array
      */
     public function getJoueursId(){
-        return $this->joueurs;
+        return $this->idJoueurs;
     }
 
     /**
