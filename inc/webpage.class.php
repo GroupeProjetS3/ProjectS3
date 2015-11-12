@@ -85,6 +85,15 @@ HTML
 HTML
         ) ;
     }
+
+    public function appendBootstrap($url){
+      $this->appendToHead(<<<HTML
+  <script type='text/javascript' src='{$url}/dist/js/bootstrap.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap-theme.min.css">
+HTML
+      ) ;
+    }
     /**
      * Ajouter un contenu dans body
      * @param string $content Le contenu à ajouter
@@ -104,11 +113,28 @@ HTML
      * Produire la page Web complète
      * @return string
      */
-    public function toHTML() {
-        return <<<HTML
-<!DOCTYPE html>
-<html lang="fr">
-</html>
-HTML;
-    }
+     public function toHTML() {
+         if (is_null($this->title)) throw new Exception(__CLASS__ . ": title not set") ;
+
+         $lastmod = strftime("Dernière modification de cette page le %d/%m/%Y à %Hh%M", getlastmod()) ;
+         return (<<<HTML
+ <!doctype html>
+ <html lang="fr">
+     <head>
+         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+         <title>{$this->title}</title>
+ {$this->head}
+     </head>
+     <body>
+         <div id='page'>
+ {$this->body}
+             <span id='lastmodified'>
+                 {$lastmod}
+             </span>
+         </div>
+     </body>
+ </html>
+HTML
+);
+     }
 }

@@ -248,4 +248,21 @@ SQL
       $_SESSION['challenge'] = $res;
       return $res;
      }
+
+     public static function loginForm($action){
+       return (<<<HTML
+<form action="$action" method="POST">
+ <div class="form-group">
+   <label>Email address</label>
+   <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+ </div>
+ <div class="form-group">
+   <label>Password</label>
+   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+ </div>
+ <button type="submit" class="btn btn-default">Submit</button>
+</form>
+HTML
+);
+     }
 }
