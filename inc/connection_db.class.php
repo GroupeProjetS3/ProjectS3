@@ -45,7 +45,7 @@ final class ConnectionDB {
     * @throws Exception si la configuration n'a pas été effectuée.
     * @return PDO instance unique
     */
-   public static function getInstance() {
+   private static function getInstance() {
       if (is_null(self::$_instance)) {
           self::$_instance = new PDO(self::$_DSN, self::$_username, self::$_password, self::$_driverOptions);
       }
@@ -67,5 +67,60 @@ final class ConnectionDB {
         self::$_username      = $username ;
         self::$_password      = $password ;
         self::$_driverOptions = $driver_options + self::$_driverOptions ;
+    }
+
+    /**
+     * @param $classe String
+     * @param $id int
+     * @return mixed Objet du type de la classe
+     */
+    public static function createFromId($classe, $id){
+        $connection = self::getInstance();
+        $stmt = $connection->prepare(<<<SQL
+                    SELECT *
+                    FROM :classe
+                    WHERE id = :id
+SQL
+        );
+        $stmt->execute(array("classe" => $classe, "id" => $id));
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
+        return $stmt->fetch();
+    }
+
+    public static function createFromAuth($crypt, $classe){
+        $connection = ConnectionDB::GetInstance();
+        $stmt = $connection->prepare(<<<SQL
+                            SELECT *
+                            FROM :classe
+                            WHERE SHA1(concat(SHA1(pseudo), :challenge, password))=:crypt;
+SQL
+        );
+        $stmt->execute(array("challenge" => $_SESSION['challenge'], "crypt" => $crypt, "classe" => $classe));
+        $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
+        return $stmt->fetch();
+    }
+
+    /**
+     * Lance la transaction
+     */
+    public static function beginTransaction(){
+        $connection = ConnectionDB::getInstance();
+        $connection->beginTransaction();
+    }
+
+    /**
+     * Lance le commit
+     */
+    public static function commit(){
+        $connection = ConnectionDB::getInstance();
+        $connection->commit();
+    }
+
+    /**
+     * lance un rollback
+     */
+    public static function rollback(){
+        $connection = ConnectionDB::getInstance();
+        $connection->rollBack();
     }
 }

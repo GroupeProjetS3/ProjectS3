@@ -44,8 +44,6 @@ class Competition extends entity{
         $this->tournoi = $tournoi;
     }
 
-    public static function createFromId($id){}
-
     public function getTree(){
         return $this->tree;
     }

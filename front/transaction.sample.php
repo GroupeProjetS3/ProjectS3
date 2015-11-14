@@ -25,32 +25,14 @@
  --------------------------------------------------------------------------
  */
 
-/**
- * Class Creneau
- *
- */
-class Creneau extends entity{
-    private $hDeb = null;
-    private $duree = null;
-    private $jour = null;
+ConnectionDB::beginTransaction();
+try{
+    // TRANSACTION CODE HERE
+    // toutes les modifications de la table suite à un formulaire doivent
+    // se trouver dans une transaction comme celle ci
+    // cela permet une meilleure efficacité de la BD
 
-    /**
-     * @param $creneau Creneau
-     * @return bool
-     */
-    public function equals($creneau){
-        return $this->hDeb == $creneau->hDeb && $this->duree = $creneau->duree;
-    }
-
-    public function getHDeb(){}
-
-    public function setHDeb(){}
-
-    public function getDuree(){}
-
-    public function setDuree(){}
-
-    public function setJour(){}
-
-    public function getJour(){}
+}catch(Exception $e){
+    ConnectionDB::rollback();
 }
+ConnectionDB::commit();

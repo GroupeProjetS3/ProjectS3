@@ -34,8 +34,6 @@ class Hebergement extends entity{
         $this->hebergeur = $hebergeur;
     }
 
-    public static function createFromId($id){
-    }
 
     public function getNbPlaces(){}
 

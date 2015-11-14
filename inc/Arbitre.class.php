@@ -30,19 +30,3 @@ require_once("autoload.function.php");
 class Arbitre extends HostUser{
 
 }
-
-class ArbitreLigne extends Arbitre{
-
-}
-
-class ArbitreFilet extends Arbitre{
-
-}
-
-class ArbitreChaise extends Arbitre{
-
-}
-
-class Ramasseur extends Arbitre{
-
-}

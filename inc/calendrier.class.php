@@ -32,14 +32,12 @@
  * se chargera de l'affichage de celle-ci
  * se chargera aussi de la création des matchs
  */
-class Calendrier extends entity{
+class Calendrier{
     private $matchs = array();
     private $tournoi = null;
     private $Tree = null;
 
     public function __construct($tournoi){}
-
-    public static function createFromId($id){}
 
     /**
      * @param $tournoi Tournoi

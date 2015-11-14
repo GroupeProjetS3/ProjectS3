@@ -115,24 +115,6 @@ class User extends entity{
         return $trueUser;
     }
 
-    /**
-     * Instancie un utilisateur en fonction d'un identifiant
-     * @param $id l'identifiant de l'utilisateur
-     */
-    public static function createFromId($id){
-        $connection = ConnectionDB::GetInstance();
-        $stmt = $connection->prepare(<<<SQL
-                    SELECT *
-                    FROM User
-                    WHERE id = ?
-SQL
-        );
-        $stmt->execute(array($id));
-        $stmt->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
-        $user = $stmt->fetch();
-
-        $user = self::building($user);
-    }
 /*
  -------------------------------------------------------------------------
     A partir d'ici se trouvent les méthodes en rapport avec la BD
@@ -147,17 +129,8 @@ SQL
       */
      public static function createFromAuth($crypt){
           self::startSession();
-          $connection = ConnectionDB::GetInstance();
-          $stmt = $connection->prepare(<<<SQL
-                    SELECT *
-                    FROM User
-                    WHERE SHA1(concat(SHA1(pseudo), :challenge, password))=:crypt;
-SQL
-        );
-         $stmt->execute(array("challenge" => $_SESSION['challenge'], "crypt" => $crypt));
-         $stmt->setFetchMode(PDO::FETCH_CLASS, __CLASS__);
-         $user = $stmt->fetch();
-         $user = self::building($user);
+         $user = self::building(
+             ConnectionDB::createFromAuth($crypt, get_called_class()));
          unset($_SESSION['challenge']);
          if($user!==false){
              self::startSession();

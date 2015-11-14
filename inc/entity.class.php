@@ -42,7 +42,18 @@ abstract class Entity{
         return $this->name;
     }
 
+    /**
+     *
+     */
     public function setName(){}
 
-    public static function createFromId($id){}
+
+    /**
+     * Instancie un utilisateur en fonction d'un identifiant
+     * @param $id int l'identifiant de l'entity
+     */
+    public static function createFromId($id){
+        $user = self::building(
+            ConnectionDB::createFromId(get_called_class(), $id));
+    }
 }
