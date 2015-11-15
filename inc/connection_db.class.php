@@ -24,7 +24,15 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-final class ConnectionDB {
+
+
+/**
+ * Class ConnectionDB
+ * Cette classe vise à gérer la connection à la base de donnée
+ * mais aussi de gérer les requetes
+ * Les requetes y seront refactorisé
+ */
+final class Connection_DB {
 
    private static $_instance = null ;
    private static $_DSN = null ;
@@ -45,7 +53,7 @@ final class ConnectionDB {
     * @throws Exception si la configuration n'a pas été effectuée.
     * @return PDO instance unique
     */
-   private static function getInstance() {
+   public static function getInstance() {
       if (is_null(self::$_instance)) {
           self::$_instance = new PDO(self::$_DSN, self::$_username, self::$_password, self::$_driverOptions);
       }
@@ -70,41 +78,10 @@ final class ConnectionDB {
     }
 
     /**
-     * @param $classe String
-     * @param $id int
-     * @return mixed Objet du type de la classe
-     */
-    public static function createFromId($classe, $id){
-        $connection = self::getInstance();
-        $stmt = $connection->prepare(<<<SQL
-                    SELECT *
-                    FROM :classe
-                    WHERE id = :id
-SQL
-        );
-        $stmt->execute(array("classe" => $classe, "id" => $id));
-        $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
-        return $stmt->fetch();
-    }
-
-    public static function createFromAuth($crypt, $classe){
-        $connection = ConnectionDB::GetInstance();
-        $stmt = $connection->prepare(<<<SQL
-                            SELECT *
-                            FROM :classe
-                            WHERE SHA1(concat(SHA1(pseudo), :challenge, password))=:crypt;
-SQL
-        );
-        $stmt->execute(array("challenge" => $_SESSION['challenge'], "crypt" => $crypt, "classe" => $classe));
-        $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
-        return $stmt->fetch();
-    }
-
-    /**
      * Lance la transaction
      */
     public static function beginTransaction(){
-        $connection = ConnectionDB::getInstance();
+        $connection = self::getInstance();
         $connection->beginTransaction();
     }
 
@@ -112,7 +89,7 @@ SQL
      * Lance le commit
      */
     public static function commit(){
-        $connection = ConnectionDB::getInstance();
+        $connection = self::getInstance();
         $connection->commit();
     }
 
@@ -120,7 +97,7 @@ SQL
      * lance un rollback
      */
     public static function rollback(){
-        $connection = ConnectionDB::getInstance();
+        $connection = self::getInstance();
         $connection->rollBack();
     }
 }

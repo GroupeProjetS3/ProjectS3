@@ -26,5 +26,5 @@
  */
 
 require_once(__DIR_INC__."/autoload.function.php");
-ConnectionDB::setConfiguration('mysql:host=mysql;dbname=infs3_prj13;charset=utf8', 'infs3_prj13' , 'projets3') ;
+Connection_DB::setConfiguration('mysql:host=mysql;dbname=infs3_prj13;charset=utf8', 'infs3_prj13' , 'projets3') ;
 //TODO ajouter la config de notre server

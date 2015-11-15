@@ -99,17 +99,8 @@ class User extends entity{
             case "Staff":
                 $trueUser = new Staff($user);
                 break;
-            case "ArbitreFilet":
-                $trueUser = new ArbitreFilet($user);
-                break;
-            case "ArbitreChaise":
-                $trueUser = new ArbitreChaise($user);
-                break;
-            case "ArbitreLigne":
-                $trueUser = new ArbitreLigne($user);
-                break;
-            case "Ramasseur":
-                $trueUser = new Ramasseur($user);
+            case "Arbitre":
+                $trueUser = new Arbitre($user);
                 break;
         }
         return $trueUser;
@@ -130,7 +121,7 @@ class User extends entity{
      public static function createFromAuth($crypt){
           self::startSession();
          $user = self::building(
-             ConnectionDB::createFromAuth($crypt, get_called_class()));
+             PredefinedRequests::checkAuth(get_called_class(), $crypt));
          unset($_SESSION['challenge']);
          if($user!==false){
              self::startSession();

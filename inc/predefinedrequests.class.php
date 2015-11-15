@@ -24,35 +24,22 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-abstract class Entity{
-    protected $id = null;
-    protected $name = null;
 
-    /**
-     * @return int id
-     */
-    public function getId(){
-        return $this->id;
+class PredefinedRequests{
+
+    public static function checkAuth($classe, $crypt){
+        $request = new Request('select', $classe);
+        $request->setparams('*')
+                ->setConditions("SHA1(concat(SHA1(pseudo), "
+                                .$_SESSION['challenge'].", password))="
+                                .$crypt.")");
+        return $request->execute($classe, false)->getResult();
     }
 
-    /**
-     * @return String name
-     */
-    public function getName(){
-        return $this->name;
-    }
-
-    /**
-     *
-     */
-    public function setName(){}
-
-
-    /**
-     * Instancie un utilisateur en fonction d'un identifiant
-     * @param $id int l'identifiant de l'entity
-     */
-    public static function createFromId($id){
-        return PredefinedRequests::createFromId(get_called_class(), $id);
+    public static function createFromId($classe, $id){
+        $request = new Request('select', $classe);
+        $request->setparams('*')
+            ->setConditions("id = ".$id);
+        return $request->execute($classe, false)->getResult();
     }
 }
