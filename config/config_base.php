@@ -65,6 +65,17 @@ if (!defined("FRONT_DIR")) {
    define("FRONT_DIR",RACINE . "/front");
 }
 
+
+// emplacement par défaut des fichiers d'installation
+if (!defined("INSTALL_DIR")) {
+    define("INSTALL_DIR",RACINE . "/install");
+}
+
+// emplacement par défaut des fichiers d'installation
+if (!defined("INSTALL_DB_DIR")) {
+    define("INSTALL_DB_DIR",INSTALL_DIR."/db");
+}
+
 /*
 require_once(INC_DIR."/autoload.function.php");
 Glb::loadConfig();
