@@ -53,6 +53,7 @@ abstract class Entity{
      * @param $id int l'identifiant de l'entity
      */
     public static function createFromId($id){
-        return PredefinedRequests::createFromId(get_called_class(), $id);
+        return PredefinedRequests::getAll(get_called_class(), "id = ".$id)
+                                                ->current();
     }
 }

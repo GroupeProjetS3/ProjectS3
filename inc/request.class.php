@@ -43,12 +43,7 @@
       private $params;
 
       /**
-       * @var
-       */
-      private $result;
-
-      /**
-       * @var array le tableau des conditions de la requete
+       * @var String les conditions de la requete
        */
       private $conditions;
 
@@ -113,19 +108,6 @@
       }
 
       /**
-       * @return Generator
-       */
-      function getResults() {
-          foreach($this->result as $value){
-              yield $value;
-          }
-      }
-
-      function getResult() {
-          return $this->result;
-      }
-
-      /**
        * @return String le code sql
        */
       function getSQL() {
@@ -133,14 +115,16 @@
       }
 
       /**
-       * @return array les conditions de la requete
+       * @return String les conditions de la requete
        */
       function getConditions() {
           return $this->conditions;
       }
 
       /**
-       *  Execution de la requete Sql
+       * @param null $classe
+       * @param $fetchAll
+       * @return Generator
        */
       function execute($classe = null, $fetchAll){
           $this->sql = $this->command();
@@ -153,12 +137,9 @@
               $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
           else
               $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          if($fetchAll){
-              $this->result = $stmt->fetchAll();
-          }else{
-              $this->result = $stmt->fetch();
+          while($result = $stmt->fetch()) {
+              yield $result;
           }
-          return $this;
       }
 
       /**

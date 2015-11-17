@@ -121,7 +121,10 @@ class User extends entity{
      public static function createFromAuth($crypt){
           self::startSession();
          $user = self::building(
-             PredefinedRequests::checkAuth(get_called_class(), $crypt));
+             PredefinedRequests::getAll(get_called_class(),
+                                        "SHA1(concat(SHA1(pseudo), "
+                                        .$_SESSION['challenge'].", password))="
+                                        .$crypt.")")->current());
          unset($_SESSION['challenge']);
          if($user!==false){
              self::startSession();

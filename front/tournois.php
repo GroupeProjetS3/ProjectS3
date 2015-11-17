@@ -25,26 +25,21 @@
  --------------------------------------------------------------------------
  */
 
-abstract class DatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
-{
-    // instancie pdo une seule fois
-    static private $pdo = null;
+require_once INC_DIR."/autoload.function.php";
 
-    // instancie PHPUnit_Extensions_Database_DB_IDatabaseConnection une seule fois
-    private $conn = null;
+$p = new Webpage("Gestion des Tournois");
+$content = "<nav>navigation vers les autres gestionnaires (défini dans un autre webpage je pense)</nav>";
 
-    final public function getConnection(){
-        if ($this->conn === null) {
-            if (self::$pdo == null) {
-                self::$pdo = new PDO("mysql:host=localhost;dbname=bulletproof","dbuser", "dbpass");
-            }
-            $this->conn = $this->createDefaultDBConnection(self::$pdo, 'testDatabase');
-        }
+$content.='<div><ul>';
 
-        return $this->conn;
-    }
-
-    public function getDataSet() {
-        return $this->createMySQLXMLDataSet(INSTALL_DB_DIR."/seed.xml");
-    }
+foreach(Tournoi::getAllTournois() as $tournoi){
+    $content.='<li>';
+    $tournoi->getName();
+    $content.='</li>';
 }
+
+$content.='</ul></div>';
+
+$p->appendContent($content);
+
+echo $p->toHTML();

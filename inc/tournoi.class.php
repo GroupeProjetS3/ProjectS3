@@ -48,12 +48,12 @@ class Tournoi extends entity{
         $this->horaires = $horaires;
     }
 
-    /**
-     * @param $id
-     * Constructeur à partir d'un identifiant (permet de récupérer les infos
-     * dans la base de données)
-     */
     public static function createFromId($id){}
+
+    public static function getAllTournois(){
+        return PredefinedRequests::getAll(get_called_class());
+    }
+
 
     /**
      * retourne toute les compétitions constituant le tournoi

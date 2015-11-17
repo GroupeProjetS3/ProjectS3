@@ -27,19 +27,12 @@
 
 class PredefinedRequests{
 
-    public static function checkAuth($classe, $crypt){
+    public static function getAll($classe, $condition = null){
         $request = new Request('select', $classe);
-        $request->setparams('*')
-                ->setConditions("SHA1(concat(SHA1(pseudo), "
-                                .$_SESSION['challenge'].", password))="
-                                .$crypt.")");
-        return $request->execute($classe, false)->getResult();
-    }
-
-    public static function createFromId($classe, $id){
-        $request = new Request('select', $classe);
-        $request->setparams('*')
-            ->setConditions("id = ".$id);
-        return $request->execute($classe, false)->getResult();
+        $request->setparams('*');
+        if($condition != null){
+            $request->setConditions($condition);
+        }
+        return $request->execute($classe);
     }
 }
