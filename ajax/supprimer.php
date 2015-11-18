@@ -25,31 +25,15 @@
  --------------------------------------------------------------------------
  */
 
-require_once INC_DIR."/autoload.function.php";
+$classe = null;
 
-$p = new Webpage("Gestion des Tournois");
+require_once(INC_DIR."/autoload.function.php");
 
-
-
-$area = AJAX_DIR."/areaTournoi.php";
-$navigation = AJAX_DIR."/navigation.php";
-$js =<<<JAVASCRIPT
-
-JAVASCRIPT;
-
-
-$content = <<<HTML
-    <div id="navigation"></div>
-    <div id="area"></div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#navigation").load({$navigation});
-        $("#area").load({$area});
-    });
-</script>
-HTML;
-
-
-$p->appendContent($content);
-
-echo $p->toHTML();
+if(isset($_GET['classe']) && !null == $_GET['classe']){
+    $classe = $_GET['classe'];
+    foreach($_GET as $id => $value){
+        if($id != 'classe'){
+            PredefinedRequests::supprimer($classe, 'id = '.$value);
+        }
+    }
+}

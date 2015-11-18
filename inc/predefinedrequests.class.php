@@ -35,4 +35,12 @@ class PredefinedRequests{
         }
         return $request->execute($classe);
     }
+
+    public static function supprimer($classe, $condition = null){
+        $request = new Request('delete', $classe);
+        if($condition != null){
+            $request->setConditions($condition);
+        }
+        return $request->execute($classe);
+    }
 }

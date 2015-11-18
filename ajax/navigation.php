@@ -25,31 +25,9 @@
  --------------------------------------------------------------------------
  */
 
-require_once INC_DIR."/autoload.function.php";
+header("Content-Type: text/html; charset=UTF-8");
 
-$p = new Webpage("Gestion des Tournois");
+$content.='';
+    // AJOUT DE LA FENETRE DE NAVIGATION VERS LES AUTRES ELEMENTS AJAX
 
-
-
-$area = AJAX_DIR."/areaTournoi.php";
-$navigation = AJAX_DIR."/navigation.php";
-$js =<<<JAVASCRIPT
-
-JAVASCRIPT;
-
-
-$content = <<<HTML
-    <div id="navigation"></div>
-    <div id="area"></div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#navigation").load({$navigation});
-        $("#area").load({$area});
-    });
-</script>
-HTML;
-
-
-$p->appendContent($content);
-
-echo $p->toHTML();
+echo $content;

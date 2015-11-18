@@ -25,31 +25,7 @@
  --------------------------------------------------------------------------
  */
 
-require_once INC_DIR."/autoload.function.php";
+// CHARGE LE FORMULAIRE DE CREATION DE TOURNOI
+// SI UN TOURNOI EST MIS EN PARAMETRE ALORS CHARGER SES INFORMATIONS DANS LES CHAMPS
 
-$p = new Webpage("Gestion des Tournois");
-
-
-
-$area = AJAX_DIR."/areaTournoi.php";
-$navigation = AJAX_DIR."/navigation.php";
-$js =<<<JAVASCRIPT
-
-JAVASCRIPT;
-
-
-$content = <<<HTML
-    <div id="navigation"></div>
-    <div id="area"></div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#navigation").load({$navigation});
-        $("#area").load({$area});
-    });
-</script>
-HTML;
-
-
-$p->appendContent($content);
-
-echo $p->toHTML();
+echo '<p>modification tournoi</p>';
