@@ -38,11 +38,7 @@ class Competition extends entity{
     private $tree = null;
     private $tournoi = null;
 
-    public function __construct($nom, $categorie, $tournoi){
-        $this->name = $nom;
-        $this->categorie = $categorie;
-        $this->tournoi = $tournoi;
-    }
+    public function __construct($nom, $categorie, $tournoi){}
 
     public function getTree(){
         return $this->tree;

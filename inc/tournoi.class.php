@@ -43,10 +43,7 @@ class Tournoi extends entity{
      * @param $horaires array
      * Constructeur de tournoi
      */
-    public function __construct($nom, $horaires){
-        $this->name = $nom;
-        $this->horaires = $horaires;
-    }
+    public function __construct(){}
 
     public static function createFromId($id){}
 

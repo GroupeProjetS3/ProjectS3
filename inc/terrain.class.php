@@ -27,9 +27,7 @@
 class terrain extends entity{
     private $trainingField = false;
 
-    public function __construct($nom, $trainingField){
-
-    }
+    public function __construct(){}
 
     public function isTrainingField(){
         return $this->trainingField;

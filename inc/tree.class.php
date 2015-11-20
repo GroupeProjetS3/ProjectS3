@@ -33,16 +33,20 @@ class Tree{
     protected $matchTree = array();
 
     /**
-     * Constructeur de la classe Tree
      * @param $joueurs array(), le tableau contenant tout les joueurs
      * subdivisées en équipes dans le cas d'une compétition double
      */
-    public function __construct($joueurs){
-        for($i=count($joueurs);$i!=1;$i/=2){
+    public function generateTreeBase($joueurs){
+        for ($i = count($joueurs); $i != 1; $i /= 2) {
             array_push($this->matchTree, array());
         }
         $this->matchTree[0] = shuffle($joueurs);
     }
+
+    /**
+     * Constructeur de la classe Tree
+     */
+    public function __construct(){}
 
     /**
      * @param $phase int la phase de la compétition

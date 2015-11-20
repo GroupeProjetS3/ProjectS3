@@ -28,11 +28,7 @@ class Hebergement extends entity{
     private $nbPlaces;
     private $hebergeur;
 
-    public function __construct($nom, $nbPlaces, $hebergeur){
-        $this->name = $nom;
-        $this->nbPlaces = $nbPlaces;
-        $this->hebergeur = $hebergeur;
-    }
+    public function __construct(){}
 
 
     public function getNbPlaces(){}

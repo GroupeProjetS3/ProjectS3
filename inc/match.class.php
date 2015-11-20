@@ -29,11 +29,7 @@ class match extends entity{
     private $creneau = null;
     private $idJoueurs = array();
 
-    public function __construct($terrain, $creneau, $idJoueurs){
-        $this->terrain = $terrain;
-        $this->creneau = $creneau;
-        $this->idJoueurs = $idJoueurs;
-    }
+    public function __construct(){}
 
     public static function createFromId($id){}
 
