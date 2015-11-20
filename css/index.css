@@ -1,0 +1,118 @@
+header{
+    margin-left:0px;
+}
+
+#divHaut{
+	background-color: rgba(66,191,236,0.7);
+	padding: 20px;
+	border: 2px solid black;
+	border-radius:7px;
+
+}
+
+
+ul{
+	background-color: rgba(220,127,37,0.7);
+	text-align: center;
+	padding:10px; 
+	padding-top: 10px;
+	padding-bottom: 12px;
+	border-radius:7px;
+	border:solid rgba(63,47,82,1) 2px;
+	box-shadow: 8px 8px 0px #aaa; 
+
+}
+
+#menu li{
+	display: inline-block;
+	list-style-type: none;
+	padding-right:5%;		
+	padding-left:5%;
+	border-right:solid rgba(63,47,82,1) 1px;
+	margin :0px;
+
+}
+
+nav {
+    margin-top: 50px;
+    padding:1%;
+    position: fixed;
+    background-color: rgba(220,127,37,0.7);
+    text-align: center;
+    border-radius:3px;
+    border:solid rgba(63,47,82,1) 2px;
+    box-shadow: 8px 8px 0px #aaa;
+}
+
+
+#global{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+
+#menu li:last-child{
+    border-right:none;
+}
+
+/*body{
+	margin-left: 10%;
+	margin-right: 10%;
+}*/
+
+
+#presentation{
+	margin-top: 70px;
+	padding-top: 30px;
+	padding-left: 0px;
+	padding-bottom:45px;
+	border-bottom:solid black 1px;
+	border-top: solid black 1px;
+}
+
+
+#arbre{
+	padding: 30px;
+	margin-top: 25px;
+	border:solid;
+}
+
+#matchs{
+    padding: 30px;
+	margin-top: 20px;
+	border:solid;
+}
+
+.box{
+	display: inline-block;
+	margin-top: 20px;
+	padding:2%;
+	border : solid green ;
+	width: 33%;
+	box-sizing: border-box;
+
+}
+
+nav {
+    padding:1%;
+    float: left;
+    background-color: rgba(220,127,37,0.7);
+    text-align: center;
+    border-radius:3px;
+    border:solid rgba(63,47,82,1) 2px;
+    box-shadow: 8px 8px 0px #aaa;
+}
+
+
+/*
+#droite{
+	box-sizing: border-box;
+	padding:2%;
+	display: inline-block;
+	margin-top: 40px;
+	border:solid blue;
+	margin-left: 1%;
+	width:73.5%;
+
+}*/

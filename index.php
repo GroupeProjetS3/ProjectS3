@@ -1,31 +1,42 @@
 <?php
-/*
- -------------------------------------------------------------------------
- Project S3 - Gestionnaire de tournois de Tennis
 
- https://github.com/GroupeProjetS3/ProjectS3
- -------------------------------------------------------------------------
+include 'inc/autoload.function.php';
 
- LICENSE
+$p = new Webpage("Page d'accueil");
 
- This file is part of the ProjectS3.
+$p->appendCssUrl('css/index.css');
+$p->appendBootstrap("bootstrap");
 
- This is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+$p->appendContent(<<<HTML
+	<body>
+	    <div id="global">
+            <div id="presentation">
+                Notre tournoi contient tant de joueur sur tant de terrain de tant à tant
+            </div>
 
- this software is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+            <div id="arbre">
+                arbre tournoi
+            </div>
+            <div id="matchs">
+                Matchs du jour
+            </div>
 
- You should have received a copy of the GNU General Public License
- along with this software. If not, see <http://www.gnu.org/licenses/>.
- --------------------------------------------------------------------------
- */
+            <div class="box">
+                billeterie
+            </div>
 
-define('RACINE', dirname(__FILE__));
-include_once (RACINE . "/inc/autoload.function.php");
-include_once (RACINE . "/config/config_db.php");
-include_once (RACINE . "/config/config_base.php");
+            <div class="box">
+                News
+            </div>
+
+            <div class="box">
+                joueur
+            </div>
+		</div>
+	</body>
+	<footer>
+    </footer>
+HTML
+);
+
+echo $p->toHTML();
