@@ -1,0 +1,47 @@
+<?php
+require_once "webpage.class.php";
+require_once "myPDO.include.php";
+
+$pdo = myPDO::getInstance();
+
+$page = new WebPage("Billetterie");
+$page->appendCssUrl("index.css");
+
+$stmt = $pdo->prepare(<<<SQL
+			SELECT *
+			FROM TypeBillet
+SQL
+);
+
+$stmt->execute();
+$results = $stmt->fetchAll();
+$types = array();
+
+foreach($results as $result){
+	$types[$result['id_typeBillet']] = $result['libTypeBillet'];
+}
+
+$html = "<form name='billetterie' method='POST' action='validationAchats.php' >";
+for($i=1;$i<=sizeof($types);$i++){
+	$html .= "<p>";
+	$html .= "<label for='{$i}'>{$types[$i]}</label> ";
+	$html .= " <select name='{$types[$i]}'>";
+	$html .= "<option value='' selected></option>";
+	for($j=1;$j<=10;$j++){
+		$html .= "<option value='{$j}'>{$j}</option>";
+	}
+	$html .= "</select> ";
+	if($i==2)
+		$html .= " <input name='promo' type='text' placeholder='Code Promo'>";
+	else if($i==3)
+		$html .= " <input name='licence' type='text' placeholder='N° de Licence'";
+	$html .= "</p><hr>";
+}
+
+$liste = json_encode($types);
+$html.="<button type='submit'>Envoyer</button>";
+$html.="</form>";
+
+$page->appendContent($html);
+
+echo $page->toHTML();
