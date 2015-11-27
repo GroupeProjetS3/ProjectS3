@@ -14,15 +14,16 @@ class Webpage {
      * Constructeur
      * @param string $title Le titre de la page
      */
-    /*public function __construct($title) {
-        $this->title= $title;
-        if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
+    public function __construct($title) {
+        $this->title = $title;
+        $this->appendToHead("<title>{$this->title}</title>");
+        /*if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
             $auth = "";
             $this->options = "";
         }else {
             $auth = "";
-        }
-    }*/
+        }*/
+    }
     /**
      * Protéger les caractères spéciaux pouvant dégrader la page Web
      * @param string $string La chaîne à protéger
