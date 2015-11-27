@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  mysql
--- Généré le :  Lun 16 Novembre 2015 à 15:56
+-- Généré le :  Ven 27 Novembre 2015 à 13:17
 -- Version du serveur :  5.5.32-MariaDB
 -- Version de PHP :  5.3.6
 
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `arbitre`
+-- Structure de la table `Arbitre`
 --
 
 CREATE TABLE IF NOT EXISTS `Arbitre` (
@@ -35,7 +35,29 @@ CREATE TABLE IF NOT EXISTS `Arbitre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `arbre`
+-- Structure de la table `ArbitrerMatch`
+--
+
+CREATE TABLE IF NOT EXISTS `ArbitrerMatch` (
+  `id_arbitre` int(11) NOT NULL,
+  `id_match` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ArbitrerTournoi`
+--
+
+CREATE TABLE IF NOT EXISTS `ArbitrerTournoi` (
+  `id_arbitre` int(11) NOT NULL,
+  `id_tournoi` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Arbre`
 --
 
 CREATE TABLE IF NOT EXISTS `Arbre` (
@@ -46,19 +68,18 @@ CREATE TABLE IF NOT EXISTS `Arbre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `billet`
+-- Structure de la table `Billet`
 --
 
 CREATE TABLE IF NOT EXISTS `Billet` (
 `id_billet` int(11) NOT NULL,
-  `prix` double NOT NULL,
   `id_typeBillet` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categoriearbitre`
+-- Structure de la table `CategorieArbitre`
 --
 
 CREATE TABLE IF NOT EXISTS `CategorieArbitre` (
@@ -69,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `CategorieArbitre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `competition`
+-- Structure de la table `Competition`
 --
 
 CREATE TABLE IF NOT EXISTS `Competition` (
@@ -82,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `Competition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `creneau`
+-- Structure de la table `Creneau`
 --
 
 CREATE TABLE IF NOT EXISTS `Creneau` (
@@ -96,20 +117,21 @@ CREATE TABLE IF NOT EXISTS `Creneau` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `disponibilite`
+-- Structure de la table `Disponibilite`
 --
 
 CREATE TABLE IF NOT EXISTS `Disponibilite` (
   `id_match` int(11) NOT NULL,
   `id_billet` int(11) NOT NULL,
   `nbBilletsDispo` int(11) NOT NULL,
-  `nbBilletsTotal` int(11) NOT NULL
+  `nbBilletsTotal` int(11) NOT NULL,
+  `prixBillet` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `entrainement`
+-- Structure de la table `Entrainement`
 --
 
 CREATE TABLE IF NOT EXISTS `Entrainement` (
@@ -121,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `Entrainement` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `hebergement`
+-- Structure de la table `Hebergement`
 --
 
 CREATE TABLE IF NOT EXISTS `Hebergement` (
@@ -133,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `Hebergement` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `hebergeur`
+-- Structure de la table `Hebergeur`
 --
 
 CREATE TABLE IF NOT EXISTS `Hebergeur` (
@@ -143,17 +165,7 @@ CREATE TABLE IF NOT EXISTS `Hebergeur` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `host`
---
-
-CREATE TABLE IF NOT EXISTS `Participant` (
-  `id_participant` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `jouer`
+-- Structure de la table `Jouer`
 --
 
 CREATE TABLE IF NOT EXISTS `Jouer` (
@@ -165,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `Jouer` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `joueur`
+-- Structure de la table `Joueur`
 --
 
 CREATE TABLE IF NOT EXISTS `Joueur` (
@@ -176,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `Joueur` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `match`
+-- Structure de la table `Match`
 --
 
 CREATE TABLE IF NOT EXISTS `Match` (
@@ -189,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `Match` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `organisateur`
+-- Structure de la table `Organisateur`
 --
 
 CREATE TABLE IF NOT EXISTS `Organisateur` (
@@ -199,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `Organisateur` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `organiser`
+-- Structure de la table `Organiser`
 --
 
 CREATE TABLE IF NOT EXISTS `Organiser` (
@@ -210,18 +222,17 @@ CREATE TABLE IF NOT EXISTS `Organiser` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participation`
+-- Structure de la table `Participant`
 --
 
-CREATE TABLE IF NOT EXISTS `ArbitrerMatch` (
-  `id_arbitre` int(11) NOT NULL,
-  `id_match` int(11) NOT NULL
+CREATE TABLE IF NOT EXISTS `Participant` (
+  `id_participant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participerCompetition`
+-- Structure de la table `ParticiperCompetition`
 --
 
 CREATE TABLE IF NOT EXISTS `ParticiperCompetition` (
@@ -232,18 +243,7 @@ CREATE TABLE IF NOT EXISTS `ParticiperCompetition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participerTournoi`
---
-
-CREATE TABLE IF NOT EXISTS `ArbitrerTournoi` (
-  `id_arbitre` int(11) NOT NULL,
-  `id_tournoi` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `reservation`
+-- Structure de la table `Reserver`
 --
 
 CREATE TABLE IF NOT EXISTS `Reserver` (
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `Reserver` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `staff`
+-- Structure de la table `Staff`
 --
 
 CREATE TABLE IF NOT EXISTS `Staff` (
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `Staff` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `terrain`
+-- Structure de la table `Terrain`
 --
 
 CREATE TABLE IF NOT EXISTS `Terrain` (
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `Terrain` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `tournoi`
+-- Structure de la table `Tournoi`
 --
 
 CREATE TABLE IF NOT EXISTS `Tournoi` (
@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `Tournoi` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `typearbitre`
+-- Structure de la table `TypeArbitre`
 --
 
 CREATE TABLE IF NOT EXISTS `TypeArbitre` (
@@ -299,18 +299,29 @@ CREATE TABLE IF NOT EXISTS `TypeArbitre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `typebillet`
+-- Structure de la table `TypeBillet`
 --
 
 CREATE TABLE IF NOT EXISTS `TypeBillet` (
 `id_typeBillet` int(11) NOT NULL,
   `libTypeBillet` varchar(20) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `TypeBillet`
+--
+
+INSERT INTO `TypeBillet` (`id_typeBillet`, `libTypeBillet`) VALUES
+(1, 'Grand Public'),
+(2, 'Promo'),
+(3, 'Licenciés'),
+(4, 'Solidarité'),
+(5, 'Big Match');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `typecompetition`
+-- Structure de la table `TypeCompetition`
 --
 
 CREATE TABLE IF NOT EXISTS `TypeCompetition` (
@@ -321,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `TypeCompetition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `typeterrain`
+-- Structure de la table `TypeTerrain`
 --
 
 CREATE TABLE IF NOT EXISTS `TypeTerrain` (
@@ -332,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `TypeTerrain` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Structure de la table `Utilisateur`
 --
 
 CREATE TABLE IF NOT EXISTS `Utilisateur` (
@@ -341,7 +352,8 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `password` varchar(20) CHARACTER SET utf8 NOT NULL,
   `mail` varchar(20) CHARACTER SET utf8 NOT NULL,
   `firstName` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `lastName` varchar(30) CHARACTER SET utf8 NOT NULL
+  `lastName` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `N°Téléphone` varchar(15) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -349,169 +361,169 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
 --
 
 --
--- Index pour la table `arbitre`
+-- Index pour la table `Arbitre`
 --
 ALTER TABLE `Arbitre`
  ADD PRIMARY KEY (`id_arbitre`), ADD KEY `id_categorie` (`id_categorie`), ADD KEY `id_typeArbitre` (`id_typeArbitre`);
 
 --
--- Index pour la table `arbre`
+-- Index pour la table `ArbitrerMatch`
 --
-ALTER TABLE `Arbre`
- ADD PRIMARY KEY (`id_arbre`);
-
---
--- Index pour la table `billet`
---
-ALTER TABLE `Billet`
- ADD PRIMARY KEY (`id_billet`), ADD KEY `id_typeBillet` (`id_typeBillet`);
-
---
--- Index pour la table `categoriearbitre`
---
-ALTER TABLE `CategorieArbitre`
- ADD PRIMARY KEY (`id_categorie`);
-
---
--- Index pour la table `competition`
---
-ALTER TABLE `Competition`
- ADD PRIMARY KEY (`id_competition`), ADD KEY `id_typeCompettion` (`id_typeCompetition`,`id_tournoi`), ADD KEY `id_tournoi` (`id_tournoi`), ADD KEY `id_arbre` (`id_arbre`);
-
---
--- Index pour la table `creneau`
---
-ALTER TABLE `Creneau`
- ADD PRIMARY KEY (`id_creneau`);
-
---
--- Index pour la table `disponibilite`
---
-ALTER TABLE `Disponibilite`
- ADD PRIMARY KEY (`id_match`,`id_billet`), ADD KEY `id_billet` (`id_billet`);
-
---
--- Index pour la table `entrainement`
---
-ALTER TABLE `Entrainement`
- ADD PRIMARY KEY (`id_terrain`,`id_joueur`,`id_creneau`), ADD KEY `id_terrainEntrainement` (`id_terrain`), ADD KEY `id_joueur` (`id_joueur`), ADD KEY `id_creneau` (`id_creneau`);
-
---
--- Index pour la table `hebergement`
---
-ALTER TABLE `hebergement`
- ADD PRIMARY KEY (`id_hebergement`), ADD KEY `id_hebergeur` (`id_hebergeur`);
-
---
--- Index pour la table `hebergeur`
---
-ALTER TABLE `Hebergeur`
- ADD PRIMARY KEY (`id_hebergeur`), ADD KEY `id_hebergeur` (`id_hebergeur`);
-
---
--- Index pour la table `host`
---
-ALTER TABLE `Participant`
- ADD PRIMARY KEY (`id_participant`);
-
---
--- Index pour la table `jouer`
---
-ALTER TABLE `Jouer`
- ADD PRIMARY KEY (`id_joueur`,`id_match`), ADD KEY `id_match` (`id_match`);
-
---
--- Index pour la table `joueur`
---
-ALTER TABLE `Joueur`
- ADD PRIMARY KEY (`id_joueur`);
-
---
--- Index pour la table `match`
---
-ALTER TABLE `Match`
- ADD PRIMARY KEY (`id_match`), ADD KEY `id_creneau` (`id_creneau`), ADD KEY `id_terrainMatch` (`id_terrain`), ADD KEY `id_competition` (`id_competition`);
-
---
--- Index pour la table `organisateur`
---
-ALTER TABLE `Organisateur`
- ADD PRIMARY KEY (`id_organisateur`);
-
---
--- Index pour la table `organiser`
---
-ALTER TABLE `Organiser`
- ADD PRIMARY KEY (`id_organisateur`,`id_tournoi`), ADD KEY `id_tournoi` (`id_tournoi`);
-
---
--- Index pour la table `participation`
---
-ALTER TABLE `Arbitrer`
+ALTER TABLE `ArbitrerMatch`
  ADD PRIMARY KEY (`id_arbitre`,`id_match`), ADD KEY `id_match` (`id_match`);
 
 --
--- Index pour la table `participerCompetition`
---
-ALTER TABLE `ParticiperCompetition`
- ADD PRIMARY KEY (`id_joueur`,`id_competition`), ADD KEY `id_competition` (`id_competition`);
-
---
--- Index pour la table `participerTournoi`
+-- Index pour la table `ArbitrerTournoi`
 --
 ALTER TABLE `ArbitrerTournoi`
  ADD PRIMARY KEY (`id_arbitre`,`id_tournoi`), ADD KEY `id_tournoi` (`id_tournoi`);
 
 --
--- Index pour la table `reservation`
+-- Index pour la table `Arbre`
 --
-ALTER TABLE `Reserver`
- ADD PRIMARY KEY (`id_hebergement`,`id_host`), ADD KEY `id_host` (`id_host`), ADD KEY `id_hebergement` (`id_hebergement`);
+ALTER TABLE `Arbre`
+ ADD PRIMARY KEY (`id_arbre`);
 
 --
--- Index pour la table `staff`
+-- Index pour la table `Billet`
+--
+ALTER TABLE `Billet`
+ ADD PRIMARY KEY (`id_billet`), ADD KEY `id_typeBillet` (`id_typeBillet`);
+
+--
+-- Index pour la table `CategorieArbitre`
+--
+ALTER TABLE `CategorieArbitre`
+ ADD PRIMARY KEY (`id_categorie`);
+
+--
+-- Index pour la table `Competition`
+--
+ALTER TABLE `Competition`
+ ADD PRIMARY KEY (`id_competition`), ADD KEY `id_typeCompettion` (`id_typeCompetition`,`id_tournoi`), ADD KEY `id_tournoi` (`id_tournoi`), ADD KEY `id_arbre` (`id_arbre`);
+
+--
+-- Index pour la table `Creneau`
+--
+ALTER TABLE `Creneau`
+ ADD PRIMARY KEY (`id_creneau`);
+
+--
+-- Index pour la table `Disponibilite`
+--
+ALTER TABLE `Disponibilite`
+ ADD PRIMARY KEY (`id_match`,`id_billet`), ADD KEY `id_billet` (`id_billet`);
+
+--
+-- Index pour la table `Entrainement`
+--
+ALTER TABLE `Entrainement`
+ ADD PRIMARY KEY (`id_terrain`,`id_joueur`,`id_creneau`), ADD KEY `id_terrainEntrainement` (`id_terrain`), ADD KEY `id_joueur` (`id_joueur`), ADD KEY `id_creneau` (`id_creneau`);
+
+--
+-- Index pour la table `Hebergement`
+--
+ALTER TABLE `Hebergement`
+ ADD PRIMARY KEY (`id_hebergement`), ADD KEY `id_hebergeur` (`id_hebergeur`);
+
+--
+-- Index pour la table `Hebergeur`
+--
+ALTER TABLE `Hebergeur`
+ ADD PRIMARY KEY (`id_hebergeur`), ADD KEY `id_hebergeur` (`id_hebergeur`);
+
+--
+-- Index pour la table `Jouer`
+--
+ALTER TABLE `Jouer`
+ ADD PRIMARY KEY (`id_joueur`,`id_match`), ADD KEY `id_match` (`id_match`);
+
+--
+-- Index pour la table `Joueur`
+--
+ALTER TABLE `Joueur`
+ ADD PRIMARY KEY (`id_joueur`);
+
+--
+-- Index pour la table `Match`
+--
+ALTER TABLE `Match`
+ ADD PRIMARY KEY (`id_match`), ADD KEY `id_creneau` (`id_creneau`), ADD KEY `id_terrainMatch` (`id_terrain`), ADD KEY `id_competition` (`id_competition`);
+
+--
+-- Index pour la table `Organisateur`
+--
+ALTER TABLE `Organisateur`
+ ADD PRIMARY KEY (`id_organisateur`);
+
+--
+-- Index pour la table `Organiser`
+--
+ALTER TABLE `Organiser`
+ ADD PRIMARY KEY (`id_organisateur`,`id_tournoi`), ADD KEY `id_tournoi` (`id_tournoi`);
+
+--
+-- Index pour la table `Participant`
+--
+ALTER TABLE `Participant`
+ ADD PRIMARY KEY (`id_participant`);
+
+--
+-- Index pour la table `ParticiperCompetition`
+--
+ALTER TABLE `ParticiperCompetition`
+ ADD PRIMARY KEY (`id_joueur`,`id_competition`), ADD KEY `id_competition` (`id_competition`);
+
+--
+-- Index pour la table `Reserver`
+--
+ALTER TABLE `Reserver`
+ ADD PRIMARY KEY (`id_hebergement`,`id_participant`), ADD KEY `id_participant` (`id_participant`), ADD KEY `id_hebergement` (`id_hebergement`);
+
+--
+-- Index pour la table `Staff`
 --
 ALTER TABLE `Staff`
  ADD PRIMARY KEY (`id_staff`);
 
 --
--- Index pour la table `terrain`
+-- Index pour la table `Terrain`
 --
 ALTER TABLE `Terrain`
  ADD PRIMARY KEY (`id_terrain`), ADD KEY `id_typeTerrain` (`id_typeTerrain`);
 
 --
--- Index pour la table `tournoi`
+-- Index pour la table `Tournoi`
 --
 ALTER TABLE `Tournoi`
  ADD PRIMARY KEY (`id_tournoi`);
 
 --
--- Index pour la table `typearbitre`
+-- Index pour la table `TypeArbitre`
 --
 ALTER TABLE `TypeArbitre`
  ADD PRIMARY KEY (`id_typeArbitre`);
 
 --
--- Index pour la table `typebillet`
+-- Index pour la table `TypeBillet`
 --
 ALTER TABLE `TypeBillet`
  ADD PRIMARY KEY (`id_typeBillet`);
 
 --
--- Index pour la table `typecompetition`
+-- Index pour la table `TypeCompetition`
 --
 ALTER TABLE `TypeCompetition`
  ADD PRIMARY KEY (`id_typeCompetition`);
 
 --
--- Index pour la table `typeterrain`
+-- Index pour la table `TypeTerrain`
 --
 ALTER TABLE `TypeTerrain`
  ADD PRIMARY KEY (`id_typeTerrain`);
 
 --
--- Index pour la table `user`
+-- Index pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
  ADD PRIMARY KEY (`id_user`), ADD UNIQUE KEY `login` (`login`), ADD UNIQUE KEY `mail` (`mail`);
@@ -521,77 +533,77 @@ ALTER TABLE `Utilisateur`
 --
 
 --
--- AUTO_INCREMENT pour la table `arbre`
+-- AUTO_INCREMENT pour la table `Arbre`
 --
 ALTER TABLE `Arbre`
 MODIFY `id_arbre` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `billet`
+-- AUTO_INCREMENT pour la table `Billet`
 --
 ALTER TABLE `Billet`
 MODIFY `id_billet` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `categoriearbitre`
+-- AUTO_INCREMENT pour la table `CategorieArbitre`
 --
 ALTER TABLE `CategorieArbitre`
 MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `competition`
+-- AUTO_INCREMENT pour la table `Competition`
 --
 ALTER TABLE `Competition`
 MODIFY `id_competition` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `creneau`
+-- AUTO_INCREMENT pour la table `Creneau`
 --
 ALTER TABLE `Creneau`
 MODIFY `id_creneau` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `hebergement`
+-- AUTO_INCREMENT pour la table `Hebergement`
 --
 ALTER TABLE `Hebergement`
 MODIFY `id_hebergement` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `hebergeur`
+-- AUTO_INCREMENT pour la table `Hebergeur`
 --
 ALTER TABLE `Hebergeur`
 MODIFY `id_hebergeur` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `match`
+-- AUTO_INCREMENT pour la table `Match`
 --
 ALTER TABLE `Match`
 MODIFY `id_match` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `terrain`
+-- AUTO_INCREMENT pour la table `Terrain`
 --
 ALTER TABLE `Terrain`
 MODIFY `id_terrain` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `tournoi`
+-- AUTO_INCREMENT pour la table `Tournoi`
 --
 ALTER TABLE `Tournoi`
 MODIFY `id_tournoi` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `typearbitre`
+-- AUTO_INCREMENT pour la table `TypeArbitre`
 --
 ALTER TABLE `TypeArbitre`
 MODIFY `id_typeArbitre` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `typebillet`
+-- AUTO_INCREMENT pour la table `TypeBillet`
 --
 ALTER TABLE `TypeBillet`
-MODIFY `id_typeBillet` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_typeBillet` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT pour la table `typecompetition`
+-- AUTO_INCREMENT pour la table `TypeCompetition`
 --
 ALTER TABLE `TypeCompetition`
 MODIFY `id_typeCompetition` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `typeterrain`
+-- AUTO_INCREMENT pour la table `TypeTerrain`
 --
 ALTER TABLE `TypeTerrain`
 MODIFY `id_typeTerrain` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
 MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
@@ -600,133 +612,133 @@ MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 --
 
 --
--- Contraintes pour la table `arbitre`
+-- Contraintes pour la table `Arbitre`
 --
 ALTER TABLE `Arbitre`
-ADD CONSTRAINT `arbitre_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `arbitre_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `CategorieArbitre` (`id_categorie`) ON DELETE SET NULL ON UPDATE CASCADE,
-ADD CONSTRAINT `arbitre_ibfk_3` FOREIGN KEY (`id_typeArbitre`) REFERENCES `TypeArbitre` (`id_typeArbitre`) ON DELETE SET NULL ON UPDATE CASCADE;
+ADD CONSTRAINT `Arbitre_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Arbitre_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `CategorieArbitre` (`id_categorie`) ON DELETE SET NULL ON UPDATE CASCADE,
+ADD CONSTRAINT `Arbitre_ibfk_3` FOREIGN KEY (`id_typeArbitre`) REFERENCES `TypeArbitre` (`id_typeArbitre`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `billet`
+-- Contraintes pour la table `ArbitrerMatch`
 --
-ALTER TABLE `billet`
-ADD CONSTRAINT `billet_ibfk_1` FOREIGN KEY (`id_typeBillet`) REFERENCES `TypeBillet` (`id_typeBillet`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `ArbitrerMatch`
+ADD CONSTRAINT `ArbitrerMatch_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Arbitre` (`id_arbitre`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `ArbitrerMatch_ibfk_2` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `competition`
---
-ALTER TABLE `competition`
-ADD CONSTRAINT `competition_ibfk_1` FOREIGN KEY (`id_typeCompetition`) REFERENCES `TypeCompetition` (`id_typeCompetition`) ON DELETE SET NULL ON UPDATE CASCADE,
-ADD CONSTRAINT `competition_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `competition_ibfk_3` FOREIGN KEY (`id_arbre`) REFERENCES `Arbre` (`id_arbre`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `disponibilite`
---
-ALTER TABLE `disponibilite`
-ADD CONSTRAINT `disponibilite_ibfk_1` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `disponibilite_ibfk_2` FOREIGN KEY (`id_billet`) REFERENCES `Billet` (`id_billet`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `entrainement`
---
-ALTER TABLE `entrainement`
-ADD CONSTRAINT `entrainement_ibfk_2` FOREIGN KEY (`id_creneau`) REFERENCES `Creneau` (`id_creneau`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `entrainement_ibfk_3` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `entrainement_ibfk_4` FOREIGN KEY (`id_terrain`) REFERENCES `Terrain` (`id_terrain`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `hebergement`
---
-ALTER TABLE `hebergement`
-ADD CONSTRAINT `hebergement_ibfk_1` FOREIGN KEY (`id_hebergeur`) REFERENCES `Hebergeur` (`id_hebergeur`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `hebergeur`
---
-ALTER TABLE `hebergeur`
-ADD CONSTRAINT `hebergeur_ibfk_1` FOREIGN KEY (`id_hebergeur`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `host`
---
-ALTER TABLE `Participant`
-ADD CONSTRAINT `host_ibfk_1` FOREIGN KEY (`id_participant`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `jouer`
---
-ALTER TABLE `Jouer`
-ADD CONSTRAINT `jouer_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `jouer_ibfk_2` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `joueur`
---
-ALTER TABLE `Joueur`
-ADD CONSTRAINT `joueur_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `match`
---
-ALTER TABLE `Match`
-ADD CONSTRAINT `match_ibfk_1` FOREIGN KEY (`id_creneau`) REFERENCES `Creneau` (`id_creneau`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `match_ibfk_3` FOREIGN KEY (`id_competition`) REFERENCES `Competition` (`id_competition`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `match_ibfk_4` FOREIGN KEY (`id_terrain`) REFERENCES `Terrain` (`id_terrain`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `organisateur`
---
-ALTER TABLE `Organisateur`
-ADD CONSTRAINT `organisateur_ibfk_1` FOREIGN KEY (`id_organisateur`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `organiser`
---
-ALTER TABLE `Organiser`
-ADD CONSTRAINT `organiser_ibfk_1` FOREIGN KEY (`id_organisateur`) REFERENCES `Organisateur` (`id_organisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `organiser_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `participation`
---
-ALTER TABLE `Arbitrer`
-ADD CONSTRAINT `participation_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Arbitre` (`id_arbitre`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `participation_ibfk_2` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `participerCompetition`
---
-ALTER TABLE `ParticiperCompetition`
-ADD CONSTRAINT `participerCompetition_ibfk_2` FOREIGN KEY (`id_competition`) REFERENCES `Competition` (`id_competition`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `participerCompetition_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `participerTournoi`
+-- Contraintes pour la table `ArbitrerTournoi`
 --
 ALTER TABLE `ArbitrerTournoi`
-ADD CONSTRAINT `participerTournoi_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `participerTournoi_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Arbitre` (`id_arbitre`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `ArbitrerTournoi_ibfk_1` FOREIGN KEY (`id_arbitre`) REFERENCES `Arbitre` (`id_arbitre`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `ArbitrerTournoi_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `reservation`
+-- Contraintes pour la table `Billet`
+--
+ALTER TABLE `Billet`
+ADD CONSTRAINT `Billet_ibfk_1` FOREIGN KEY (`id_typeBillet`) REFERENCES `TypeBillet` (`id_typeBillet`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Competition`
+--
+ALTER TABLE `Competition`
+ADD CONSTRAINT `Competition_ibfk_1` FOREIGN KEY (`id_typeCompetition`) REFERENCES `TypeCompetition` (`id_typeCompetition`) ON DELETE SET NULL ON UPDATE CASCADE,
+ADD CONSTRAINT `Competition_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Competition_ibfk_3` FOREIGN KEY (`id_arbre`) REFERENCES `Arbre` (`id_arbre`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Disponibilite`
+--
+ALTER TABLE `Disponibilite`
+ADD CONSTRAINT `Disponibilite_ibfk_1` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Disponibilite_ibfk_2` FOREIGN KEY (`id_billet`) REFERENCES `Billet` (`id_billet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Entrainement`
+--
+ALTER TABLE `Entrainement`
+ADD CONSTRAINT `Entrainement_ibfk_2` FOREIGN KEY (`id_creneau`) REFERENCES `Creneau` (`id_creneau`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Entrainement_ibfk_3` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Entrainement_ibfk_4` FOREIGN KEY (`id_terrain`) REFERENCES `Terrain` (`id_terrain`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Hebergement`
+--
+ALTER TABLE `Hebergement`
+ADD CONSTRAINT `Hebergement_ibfk_1` FOREIGN KEY (`id_hebergeur`) REFERENCES `Hebergeur` (`id_hebergeur`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Hebergeur`
+--
+ALTER TABLE `Hebergeur`
+ADD CONSTRAINT `Hebergeur_ibfk_1` FOREIGN KEY (`id_hebergeur`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Jouer`
+--
+ALTER TABLE `Jouer`
+ADD CONSTRAINT `Jouer_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Jouer_ibfk_2` FOREIGN KEY (`id_match`) REFERENCES `Match` (`id_match`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Joueur`
+--
+ALTER TABLE `Joueur`
+ADD CONSTRAINT `Joueur_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Match`
+--
+ALTER TABLE `Match`
+ADD CONSTRAINT `Match_ibfk_1` FOREIGN KEY (`id_creneau`) REFERENCES `Creneau` (`id_creneau`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Match_ibfk_3` FOREIGN KEY (`id_competition`) REFERENCES `Competition` (`id_competition`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Match_ibfk_4` FOREIGN KEY (`id_terrain`) REFERENCES `Terrain` (`id_terrain`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Organisateur`
+--
+ALTER TABLE `Organisateur`
+ADD CONSTRAINT `Organisateur_ibfk_1` FOREIGN KEY (`id_organisateur`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Organiser`
+--
+ALTER TABLE `Organiser`
+ADD CONSTRAINT `Organiser_ibfk_1` FOREIGN KEY (`id_organisateur`) REFERENCES `Organisateur` (`id_organisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Organiser_ibfk_2` FOREIGN KEY (`id_tournoi`) REFERENCES `Tournoi` (`id_tournoi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Participant`
+--
+ALTER TABLE `Participant`
+ADD CONSTRAINT `Participant_ibfk_1` FOREIGN KEY (`id_participant`) REFERENCES `Utilisateur` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `ParticiperCompetition`
+--
+ALTER TABLE `ParticiperCompetition`
+ADD CONSTRAINT `ParticiperCompetition_ibfk_1` FOREIGN KEY (`id_joueur`) REFERENCES `Joueur` (`id_joueur`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `ParticiperCompetition_ibfk_2` FOREIGN KEY (`id_competition`) REFERENCES `Competition` (`id_competition`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Reserver`
 --
 ALTER TABLE `Reserver`
-ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_hebergement`) REFERENCES `Hebergement` (`id_hebergement`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `reservation_ibfk_3` FOREIGN KEY (`id_host`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `Reserver_ibfk_1` FOREIGN KEY (`id_hebergement`) REFERENCES `Hebergement` (`id_hebergement`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `Reserver_ibfk_3` FOREIGN KEY (`id_participant`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `staff`
+-- Contraintes pour la table `Staff`
 --
 ALTER TABLE `Staff`
-ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `Staff_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `Participant` (`id_participant`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `terrain`
+-- Contraintes pour la table `Terrain`
 --
 ALTER TABLE `Terrain`
-ADD CONSTRAINT `terrain_ibfk_1` FOREIGN KEY (`id_typeTerrain`) REFERENCES `TypeTerrain` (`id_typeTerrain`) ON DELETE SET NULL ON UPDATE CASCADE;
+ADD CONSTRAINT `Terrain_ibfk_1` FOREIGN KEY (`id_typeTerrain`) REFERENCES `TypeTerrain` (`id_typeTerrain`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
