@@ -6,7 +6,7 @@ $pdo = myPDO::getInstance();
 
 $page = new WebPage("Billetterie");
 $page->appendCssUrl("index.css");
-
+$page->appendJsUrl("java.js");
 $stmt = $pdo->prepare(<<<SQL
 			SELECT *
 			FROM TypeBillet
@@ -21,20 +21,29 @@ foreach($results as $result){
 	$types[$result['id_typeBillet']] = $result['libTypeBillet'];
 }
 
-$html = "<form name='billetterie' method='POST' action='validationAchats.php' >";
+$html = "<form name='billetterie' method='POST' action='validationAchat.php' >";
 for($i=1;$i<=sizeof($types);$i++){
 	$html .= "<p>";
-	$html .= "<label for='{$i}'>{$types[$i]}</label> ";
-	$html .= " <select name='{$types[$i]}'>";
+	$html .= "<label for='{$types[$i]}'>{$types[$i]}</label> ";
+	
+	if(strcmp($types[$i], 'Promo')==0)
+		$html.=" <select id='_Promo' onchange='field(\"Promo\")'>";
+	else if(strcmp($types[$i], 'Licenciés')==0)
+		$html.=" <select id='_Licence' onchange='field(\"Licence\")'>";
+	else
+		$html .= " <select name='{$types[$i]}'>";
 	$html .= "<option value='' selected></option>";
+	
 	for($j=1;$j<=10;$j++){
 		$html .= "<option value='{$j}'>{$j}</option>";
 	}
 	$html .= "</select> ";
-	if($i==2)
-		$html .= " <input name='promo' type='text' placeholder='Code Promo'>";
-	else if($i==3)
-		$html .= " <input name='licence' type='text' placeholder='N° de Licence'";
+	
+	if(strcmp($types[$i], 'Promo')==0)
+		$html.="<div id='Promo'></div>";
+	else if(strcmp($types[$i], 'Licenciés')==0)
+		$html.="<div id='Licence'></div>";
+	
 	$html .= "</p><hr>";
 }
 
