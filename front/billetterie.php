@@ -1,12 +1,14 @@
 <?php
-require_once "webpage.class.php";
-require_once "myPDO.include.php";
+require_once("../config/config_db.php");
+require_once("../config/config_base.php");
+require_once(INC_DIR."/autoload.function.php");
 
-$pdo = myPDO::getInstance();
+$pdo = Connection_DB::getInstance();
 
 $page = new WebPage("Billetterie");
-$page->appendCssUrl("index.css");
-$page->appendJsUrl("java.js");
+$page->appendCssUrl("../css/index.css");
+$page->appendJsUrl("../js/fieldBilletterie.js");
+$page->appendJsUrl("../js/liens.js");
 $stmt = $pdo->prepare(<<<SQL
 			SELECT *
 			FROM TypeBillet
@@ -27,9 +29,9 @@ for($i=1;$i<=sizeof($types);$i++){
 	$html .= "<label for='{$types[$i]}'>{$types[$i]}</label> ";
 	
 	if(strcmp($types[$i], 'Promo')==0)
-		$html.=" <select id='_Promo' onchange='field(\"Promo\")'>";
+		$html.=" <select name='{$types[$i]}' id='_Promo' onchange='field(\"Promo\")'>";
 	else if(strcmp($types[$i], 'Licenciés')==0)
-		$html.=" <select id='_Licence' onchange='field(\"Licence\")'>";
+		$html.=" <select name='{$types[$i]}' id='_Licence' onchange='field(\"Licence\")'>";
 	else
 		$html .= " <select name='{$types[$i]}'>";
 	$html .= "<option value='' selected></option>";
@@ -47,10 +49,9 @@ for($i=1;$i<=sizeof($types);$i++){
 	$html .= "</p><hr>";
 }
 
-$liste = json_encode($types);
 $html.="<button type='submit'>Envoyer</button>";
 $html.="</form>";
-
+$html.="<script type='text/javascript' language='javascript'>billetterie()</script>";
 $page->appendContent($html);
 
 echo $page->toHTML();

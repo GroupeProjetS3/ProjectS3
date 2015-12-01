@@ -1,10 +1,11 @@
 <?php
-require_once 'myPDO.include.php';
+require_once (INC_DIR."/autoload.function.php");
+
 class typeBillet{
 	private $types = array();
 
 	function __construct(){
-		$pdo = myPDO::getInstance();
+		$pdo = Connection_DB::getInstance();
 		$stmt = $pdo->prepare(<<<SQL
 					SELECT *
 					FROM TypeBillet

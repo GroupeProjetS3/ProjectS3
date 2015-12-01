@@ -5,6 +5,7 @@ include 'inc/autoload.function.php';
 $p = new Webpage("Page d'accueil");
 
 $p->appendCssUrl('css/index.css');
+$p->appendJsUrl('js/liens.js');
 $p->appendBootstrap("bootstrap");
 
 $p->appendContent(<<<HTML

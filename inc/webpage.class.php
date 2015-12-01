@@ -118,14 +118,14 @@ HTML
             <li><a href="">Accueil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrains</a></li>
-            <li><a href="">Billeterie</a></li>
+            <li><a class="billetterie" href="./front/billetterie.php">Billeterie</a></li>
             {$this->menu}
         </ul>
         <nav>
             <li><a href="">Acceuil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrain</a></li>
-            <li><a href="">Billeterie</a></li>
+            <li><a class="billetterie" href="./front/billetterie.php">Billeterie</a></li>
             {$this->nav}
 
         </nav>

@@ -53,13 +53,12 @@ final class Connection_DB {
     * @throws Exception si la configuration n'a pas été effectuée.
     * @return PDO instance unique
     */
-   public static function getInstance() {
-      if (is_null(self::$_instance)) {
-          self::$_instance = new PDO(self::$_DSN, self::$_username, self::$_password, self::$_driverOptions);
-      }
-      return self::$_instance ;
-   }
-
+	public static function getInstance(){
+		if (is_null(self::$_instance)){
+				self::$_instance = new PDO(self::$_DSN, self::$_username, self::$_password, self::$_driverOptions) ;
+		}
+		return self::$_instance ;
+	}
 
     /**
      * Fixer la configuration de la connexion à la BD.
@@ -76,7 +75,16 @@ final class Connection_DB {
         self::$_password      = $password ;
         self::$_driverOptions = $driver_options + self::$_driverOptions ;
     }
-
+	
+	/**
+     * Vérifier si la configuration de la connexion à la BD a été effectuée.
+     *
+     * @return bool
+     */
+    private static function hasConfiguration() {
+        return self::$_DSN !== null ;
+    }
+	
     /**
      * Lance la transaction
      */

@@ -24,7 +24,9 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+require_once("config_base.php");
+require_once(INC_DIR."/autoload.function.php");
 
-require_once(__DIR_INC__."/autoload.function.php");
-Connection_DB::setConfiguration('mysql:host=mysql;dbname=infs3_prj13;charset=utf8', 'infs3_prj13' , 'projets3') ;
+//Connection_DB::setConfiguration('mysql:host=mysql;dbname=infs3_prj13;charset=utf8', 'infs3_prj13' , 'projets3') ;
+Connection_DB::setConfiguration('mysql:host=localhost;dbname=infs3_prj13;charset=utf8','root','');
 //TODO ajouter la config de notre server

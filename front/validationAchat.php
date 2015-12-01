@@ -1,10 +1,10 @@
 <?php
-require_once 'myPDO.include.php';
-require_once 'webpage.class.php';
-require_once 'typeBillet.class.php';
+require_once("../config/config_db.php");
+require_once("../config/config_base.php");
+require_once(INC_DIR."/autoload.function.php");
 
 $page = new WebPage("Validation Achat des Billets");
-$page->appendCssUrl("index.css");
+$page->appendCssUrl("../css/index.css");
 /*
 $pdo = myPDO::getInstance();
 $stmt = $pdo->prepare(<<<SQL
