@@ -24,7 +24,7 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-define("RACINE", "C:\wamp\www\ProjectS3");
+//define("RACINE", "C:\wamp\www\ProjectS3");
 
 // emplacement par défaut des fichiers de configuration
 if (!defined("CONFIG_DIR")) {

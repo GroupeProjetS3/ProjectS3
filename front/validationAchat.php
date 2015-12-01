@@ -5,6 +5,7 @@ require_once(INC_DIR."/autoload.function.php");
 
 $page = new WebPage("Validation Achat des Billets");
 $page->appendCssUrl("../css/index.css");
+$page->appendJsUrl("../js/liens.js");
 /*
 $pdo = myPDO::getInstance();
 $stmt = $pdo->prepare(<<<SQL
@@ -32,4 +33,5 @@ foreach($types as $type){
 		}
 	}
 }
+$page->appendContent("<script type='text/javascript' language='javascript'>billetterie()</script>");
 echo $page->toHTML();

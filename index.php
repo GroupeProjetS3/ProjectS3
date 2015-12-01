@@ -1,7 +1,6 @@
 <?php
-
+require_once("config/config_base.php");
 include 'inc/autoload.function.php';
-
 $p = new Webpage("Page d'accueil");
 
 $p->appendCssUrl('css/index.css');

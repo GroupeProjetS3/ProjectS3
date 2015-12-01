@@ -51,7 +51,7 @@ for($i=1;$i<=sizeof($types);$i++){
 
 $html.="<button type='submit'>Envoyer</button>";
 $html.="</form>";
-$html.="<script type='text/javascript' language='javascript'>billetterie()</script>";
+//$html.="<script type='text/javascript' language='javascript'>billetterie()</script>";
 $page->appendContent($html);
 
 echo $page->toHTML();

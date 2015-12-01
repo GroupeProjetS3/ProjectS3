@@ -1,4 +1,3 @@
-
 <?php
 class Webpage {
     private $head  = null ;
@@ -8,6 +7,7 @@ class Webpage {
     private $footer = null;
     private $nav = null ;
     private $menu = null ;
+	private $racineFront = FRONT_DIR;
     // Les Choses accessibles en fonction de la connexion
     private $option = null;
     /**
@@ -118,7 +118,7 @@ HTML
             <li><a href="">Accueil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrains</a></li>
-            <li><a class="billetterie" href="./front/billetterie.php">Billeterie</a></li>
+			<li><a class="billetterie" href="{$this->racineFront}/billetterie.php">Billeterie</a></li>
             {$this->menu}
         </ul>
         <nav>
