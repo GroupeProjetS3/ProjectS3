@@ -1,6 +1,6 @@
 <?php
-require_once("../config/config_db.php");
 require_once("../config/config_base.php");
+require_once(CONFIG_DIR."/config_db.php");
 require_once(INC_DIR."/autoload.function.php");
 
 $pdo = Connection_DB::getInstance();

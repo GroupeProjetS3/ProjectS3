@@ -1,5 +1,7 @@
 <?php
+
 class Webpage {
+	
     private $head  = null ;
     private $title = null ;
     private $body  = null ;
@@ -7,7 +9,7 @@ class Webpage {
     private $footer = null;
     private $nav = null ;
     private $menu = null ;
-	private $racineFront = FRONT_DIR;
+	private $racineLien = null;
     // Les Choses accessibles en fonction de la connexion
     private $option = null;
     /**
@@ -23,6 +25,7 @@ class Webpage {
         }else {
             $auth = "";
         }*/
+		$this->racineLien = RACINE_LIENS;
     }
     /**
      * Protéger les caractères spéciaux pouvant dégrader la page Web
@@ -115,17 +118,17 @@ HTML
     </header>
     <div id="divMenu">
         <ul id="menu">
-            <li><a href="">Accueil</a></li>
+            <li><a href="{$this->racineLien}">Accueil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrains</a></li>
-			<li><a class="billetterie" href="{$this->racineFront}/billetterie.php">Billeterie</a></li>
+			<li><a class="billetterie" href="{$this->racineLien}/front/billetterie.php">Billeterie</a></li>
             {$this->menu}
         </ul>
         <nav>
-            <li><a href="">Acceuil</a></li>
+            <li><a href="{$this->racineLien}">Acceuil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrain</a></li>
-            <li><a class="billetterie" href="./front/billetterie.php">Billeterie</a></li>
+            <li><a class="billetterie" href="{$this->racineLien}/front/billetterie.php">Billeterie</a></li>
             {$this->nav}
 
         </nav>

@@ -24,18 +24,27 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-//define("RACINE", "C:\wamp\www\ProjectS3");
-
+ if(!defined("RACINE_LIENS")){
+	 define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[3]);
+ }
+ 
+ if (!defined("RACINE")){
+	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
+	$racineFinale = "";
+	for($i = 0; $i <= array_search("ProjectS3", $directories) ; $i++){
+		$racineFinale .= $directories[$i]."/";
+	}
+	define("RACINE", $racineFinale);
+ }
 // emplacement par défaut des fichiers de configuration
 if (!defined("CONFIG_DIR")) {
-   define("CONFIG_DIR",RACINE . "/config");
+   define("CONFIG_DIR",RACINE . "config");
 }
 
 // emplacement par défaut des fichiers pouvant être include
 if (!defined("INC_DIR")) {
-   define("INC_DIR",RACINE . "/inc");
+   define("INC_DIR",RACINE."inc");
 }
-
 // emplacement par défaut des ressources
 if (!defined("RESOURCES_DIR")) {
    define("RESOURCES_DIR",RACINE . "/ressources");
@@ -63,7 +72,7 @@ if (!defined("CSS_DIR")) {
 
 // emplacement par défaut des pages webs
 if (!defined("FRONT_DIR")) {
-   define("FRONT_DIR",RACINE . "/front");
+   define("FRONT_DIR",RACINE . "front");
 }
 
 

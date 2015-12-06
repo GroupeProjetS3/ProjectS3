@@ -15,7 +15,7 @@ SQL
 		$results = $stmt->fetchAll();
 		
 		foreach($results as $result){
-			$this->types[$result['id']]=$result['libTypeBillet'];
+			array_push($this->types, $result['libTypeBillet']);
 		}
 	}
 	
