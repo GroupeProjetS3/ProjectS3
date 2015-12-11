@@ -10,21 +10,21 @@ $page->appendCssUrl("../css/index.css");
 $page->appendJsUrl("../js/fieldBilletterie.js");
 $page->appendJsUrl("../js/liens.js");
 $stmt = $pdo->prepare(<<<SQL
-			SELECT *
-			FROM TypeBillet
+			SELECT prixBillet 
+			FROM disponibilite
+			WHERE id_typeBillet = ?
 SQL
 );
 
-$stmt->execute();
-$results = $stmt->fetchAll();
-$types = array();
-
-foreach($results as $result){
-	$types[$result['id_typeBillet']] = $result['libTypeBillet'];
-}
+$typesBillets = new TypeBillet();
+$types = $typesBillets->getType();
 
 $html = "<form name='billetterie' method='POST' action='validationAchat.php' >";
-for($i=1;$i<=sizeof($types);$i++){
+for($i=0;$i<sizeof($types);$i++){
+	var_dump($types[$i]);
+	$stmt->execute(array(array_search($types[$i], $types)+1));
+	var_dump($prix = $stmt->fetchAll());
+	var_dump($prix[0]['prixBillet']);
 	$html .= "<p>";
 	$html .= "<label for='{$types[$i]}'>{$types[$i]}</label> ";
 	
@@ -41,6 +41,7 @@ for($i=1;$i<=sizeof($types);$i++){
 	}
 	$html .= "</select> ";
 	
+	$html .="<span class = 'prix'>";
 	if(strcmp($types[$i], 'Promo')==0)
 		$html.="<div id='Promo'></div>";
 	else if(strcmp($types[$i], 'Licenciés')==0)
