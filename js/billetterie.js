@@ -1,8 +1,8 @@
 window.onload = function(){
 	var formu = document.forms['billets'];
-	var bouton = formu.elements['bouton'];
-	
 	chargeMatchs("matchs.request.php");
+	console.log(formu.elements);
+	
 
 	bouton.onclick = function(){
 			for(i = 0; i<document.getElementsByTagName('input').length-1; i++)
@@ -33,12 +33,12 @@ window.onload = function(){
 				//<fieldset>
 					// <legend>Matchs</legend>
 					
-					var fieldset = document.createElement('fieldset');
+					// var fieldset = document.createElement('fieldset');
 					
-					var legend = document.createElement('legend');
-						legend.appendChild(document.createTextNode('Matchs'));
+					// var legend = document.createElement('legend');
+						// legend.appendChild(document.createTextNode('Matchs'));
 					
-					fieldset.appendChild(legend);
+					// fieldset.appendChild(legend);
 						
 				for (var i in json) {
 				
@@ -55,29 +55,29 @@ window.onload = function(){
 					var nameInput = 'match'+element.id_match;
 					
 					var label = document.createElement('label');
-						label.setAttribute('for',nameInput);
+						label.for=nameInput;
 						
 					var input = document.createElement('input');
-						input.setAttribute('type','checkbox');
-						input.setAttribute('value',element.id_match);
-						input.setAttribute('name',nameInput);
-						input.setAttribute('id',nameInput);
+						input.type='checkbox';
+						input.value=element.id_match;
+						input.name=nameInput;
+						input.id=nameInput;
 						
 					label.appendChild(input);
 					label.appendChild(document.createTextNode('Match du ' + element.day + ' Heure : ' + element.hDeb));
 					div.appendChild(label);
-					fieldset.appendChild(div);
+					formu.appendChild(div);
 				}
 				
-				// <fieldset>
+				// </fieldset>
 				// <input type='button' name='bouton' value='Suivant'></input>
 				
-				formu.appendChild(fieldset);
+				// formu.appendChild(fieldset);
 					
 				var bouton = document.createElement('input');
-					bouton.setAttribute('type','button');
-					bouton.setAttribute('name','bouton');
-					bouton.setAttribute('value', 'Suivant');
+					bouton.type='button';
+					bouton.id='bouton';
+					bouton.value='Suivant';
 				console.log(bouton);
 				
 				formu.appendChild(bouton);
