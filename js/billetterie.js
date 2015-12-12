@@ -29,14 +29,34 @@ window.onload = function(){
 			// Associer la fonction de traitement
 			onSuccess    : function (json) {
 				viderNoeud(formu) ;
+				
+				//<fieldset>
+					// <legend>Matchs</legend>
+					
+					var fieldset = document.createElement('fieldset');
+					
+					var legend = document.createElement('legend');
+						legend.appendChild(document.createTextNode('Matchs'));
+					
+					fieldset.appendChild(legend);
+						
 				for (var i in json) {
+				
+					// <div>
+						// <label for='nameInput'>
+						// <input type='checkbox' value='id_match' name='nameInput' id='nameInput'></input>
+						// Match du 'jour' Heure : 'heure du match'</label>
+					// </div>
+					
 					var element = json[i] ;
+					
+					var div = document.createElement('div');
 					
 					var nameInput = 'match'+element.id_match;
 					
 					var label = document.createElement('label');
 						label.setAttribute('for',nameInput);
-
+						
 					var input = document.createElement('input');
 						input.setAttribute('type','checkbox');
 						input.setAttribute('value',element.id_match);
@@ -45,12 +65,14 @@ window.onload = function(){
 						
 					label.appendChild(input);
 					label.appendChild(document.createTextNode('Match du ' + element.day + ' Heure : ' + element.hDeb));
-					
-					formu.appendChild(label);
-					
+					div.appendChild(label);
+					fieldset.appendChild(div);
 				}
-				var label = document.createElement('label');
-					label.setAttribute('for','bouton');
+				
+				// <fieldset>
+				// <input type='button' name='bouton' value='Suivant'></input>
+				
+				formu.appendChild(fieldset);
 					
 				var bouton = document.createElement('input');
 					bouton.setAttribute('type','button');
