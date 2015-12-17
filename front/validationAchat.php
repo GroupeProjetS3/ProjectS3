@@ -26,9 +26,9 @@ $types = $typesBillets->getType();
 
 foreach($types as $type){
 	$typePOST= str_replace(' ', '_', $type);
-	if(isset($_POST["{$typePOST}"])){
-		if($_POST["{$typePOST}"]!=null){
-			$quantite=$_POST["{$typePOST}"];
+	if(isset($_GET["{$typePOST}"])){
+		if($_GET["{$typePOST}"]!=null){
+			$quantite=$_GET["{$typePOST}"];
 			$page->appendContent("<p>{$type} = {$quantite}</p>");
 		}
 	}

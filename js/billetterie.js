@@ -1,88 +1,63 @@
-window.onload = function(){
-	var formu = document.forms['billets'];
-	chargeMatchs("matchs.request.php");
-	console.log(formu.elements);
+window.onload=function(){
+	$.get('matchs.request.php', 
+			'false', 
+			function(matchs){chargeMatchs(matchs)}, 
+			'json')
 	
+	function chargeMatchs(matchs){
+		$('<fieldset>')
+			.appendTo('#billets')
+		
+		$('<legend>')
+			.html('Billets')
+			.appendTo('fieldset')
+		
+		for(var i in matchs){
+			
+			var match = matchs[i]
+			var id_match=parseInt(i)+parseInt(1)
+		
+			$('<div>', {id:'match'+id_match})
+				.appendTo('fieldset')
+			
+			$('<input>',{type:'checkbox', value:id_match, id:'match_'+id_match, name:'match_'+id_match})
+				.appendTo('fieldset #match'+id_match)
+			$('<label>', {for:'match_'+id_match})
+				.html('Match du ' + match.day + ' Heure : ' + match.hDeb)
+				.appendTo('fieldset #match'+id_match)
 
-	bouton.onclick = function(){
-			for(i = 0; i<document.getElementsByTagName('input').length-1; i++)
-				if(document.getElementsByTagName('input')[i].checked)
-					console.log(document.getElementById('labelMatch'+(i+1)).innerHTML);	
-	}
-
-	function viderNoeud(noeud) {
-		while (noeud.hasChildNodes()) {
-			noeud.removeChild(noeud.lastChild) ;
+			$('<div>', {id: 'typesMatch'+id_match})
+				.appendTo('fieldset #match'+id_match)
+			
+			$.post('types.request.php', 
+					{id_match:$('#match_'+id_match).attr('value')}, 
+					function(types){chargeTypes(types)}, 
+					'json')
+			
+			if(i<$(matchs).length-1)
+				$('fieldset').append('<hr>')
 		}
 	}
 	
-	var request = null;
-	
-	function chargeMatchs(url) {
-		if (request != null) request.cancel() ;
-		request = new Request({
-			url : "matchs.request.php",
-			// Méthode de la requête
-			method   : "get",
-			// Type de résultat attendu
-			handleAs : 'json',
-			// Associer la fonction de traitement
-			onSuccess    : function (json) {
-				viderNoeud(formu) ;
+	function chargeTypes(types){
+			
+			for(var i in types){
+				var type = types[i]
+				var id_typeBillet=type.id_typeBillet
+				var id_match=type.id_match
+				var libTypeBillet=type.libTypeBillet
 				
-				//<fieldset>
-					// <legend>Matchs</legend>
-					
-					// var fieldset = document.createElement('fieldset');
-					
-					// var legend = document.createElement('legend');
-						// legend.appendChild(document.createTextNode('Matchs'));
-					
-					// fieldset.appendChild(legend);
-						
-				for (var i in json) {
-				
-					// <div>
-						// <label for='nameInput'>
-						// <input type='checkbox' value='id_match' name='nameInput' id='nameInput'></input>
-						// Match du 'jour' Heure : 'heure du match'</label>
-					// </div>
-					
-					var element = json[i] ;
-					
-					var div = document.createElement('div');
-					
-					var nameInput = 'match'+element.id_match;
-					
-					var label = document.createElement('label');
-						label.for=nameInput;
-						
-					var input = document.createElement('input');
-						input.type='checkbox';
-						input.value=element.id_match;
-						input.name=nameInput;
-						input.id=nameInput;
-						
-					label.appendChild(input);
-					label.appendChild(document.createTextNode('Match du ' + element.day + ' Heure : ' + element.hDeb));
-					div.appendChild(label);
-					formu.appendChild(div);
-				}
-				
-				// </fieldset>
-				// <input type='button' name='bouton' value='Suivant'></input>
-				
-				// formu.appendChild(fieldset);
-					
-				var bouton = document.createElement('input');
-					bouton.type='button';
-					bouton.id='bouton';
-					bouton.value='Suivant';
-				console.log(bouton);
-				
-				formu.appendChild(bouton);
+				$('<div>', {id:'type'+id_typeBillet})
+					.appendTo('#match'+id_match+' #typesMatch'+id_match)
+				$('<input>', {type:'checkbox', value:id_typeBillet, id:'type_'+id_typeBillet, name:'type_'+id_typeBillet})
+					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet)
+				$('<label>', {for:'type_'+id_typeBillet})
+					.html(libTypeBillet)
+					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet)
+				$('<div>', {id:'quantite'+id_typeBillet})
+					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet)
+				$('<select>', {id:'quantite_'+id_typeBillet})
+					.appendTo('#typesMatch'+id_match+' #quantite'+id_typeBillet)
 			}
-		})
 	}
-	
 }

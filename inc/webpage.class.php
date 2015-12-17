@@ -116,6 +116,7 @@ HTML
         </div>
 
     </header>
+    <body>
     <div id="divMenu">
         <ul id="menu">
             <li><a href="{$this->racineLien}">Accueil</a></li>
@@ -133,7 +134,6 @@ HTML
 
         </nav>
     </div>
-    <body>
    <div id='global'> 
     {$this->body}
     </div>
