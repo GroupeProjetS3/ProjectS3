@@ -28,12 +28,12 @@ require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
 require_once INC_DIR."/autoload.function.php";
 
-$p = new Webpage("Gestion des Tournois");
+$p = new Webpage("Gestion des Types de Billets");
 $p->appendCssUrl("../css/index.css");
 $p->appendJsUrl("../lib/jquery.min.js");
 
 
-$area = AJAX_DIR."/areaTournoi.php";
+$area = AJAX_DIR."/areaBillets.php";
 $navigation = AJAX_DIR."/navigation.php";
 
 
@@ -43,7 +43,7 @@ $content = <<<HTML
     <script type="text/javascript">
     $(document).ready(function(){
         $("#navigation").load('../ajax/navigation.php');
-        $("#area").load('../ajax/areaTournoi.php');
+        $("#area").load('../ajax/areaBillets.php');
     });
 </script>
 HTML;

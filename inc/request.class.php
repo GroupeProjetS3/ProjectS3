@@ -126,9 +126,17 @@
        * @param $fetchAll
        * @return Generator
        */
-      function execute($classe = null, $fetchAll){
+      function execute($classe = null){
           $this->sql = $this->command();
           $this->sql .= $this->makeRequest();
+	  if(isset($this->join))
+              $this->sql .= ' JOIN ' . $this->join;
+
+          if(isset($this->conditions))
+              $this->sql .= ' WHERE ' . $this->conditions;
+
+          if(isset($this->order))
+              $this->sql .= ' ORDER BY ' . $this->order;
 
           $connection = Connection_DB::getInstance();
           $stmt = $connection->prepare($this->sql);
@@ -162,15 +170,6 @@
                   $sql .= 'INTO ' . $this->table . ' ' . $this->insertRequest();
                   break;
           }
-          if(isset($this->join))
-              $this->sql .= ' JOIN ' . $this->join;
-
-          if(isset($this->conditions))
-              $this->sql .= ' WHERE ' . $this->conditions;
-
-          if(isset($this->order))
-              $this->sql .= ' ORDER BY ' . $this->order;
-
           return $sql;
       }
 
@@ -199,6 +198,9 @@
       }
 
       private function selectRequest(){
+	  if(!is_array($this->params)){
+	    return $this->params;
+	  }
           $sql = " ";
           foreach($this->params as $value){
               $sql.=$value.",";
