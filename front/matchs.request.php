@@ -4,8 +4,8 @@ require_once(CONFIG_DIR."/config_db.php");
 require_once(INC_DIR."/autoload.function.php");
 
 $requeteMatchs = Connection_DB::getInstance()->prepare('SELECT id_match, day, hDeb 
-								FROM infs3_prj13.creneau, infs3_prj13.match 
-								WHERE match.id_creneau=creneau.id_creneau');
+								FROM infs3_prj13.Creneau, infs3_prj13.Match 
+								WHERE Match.id_creneau=Creneau.id_creneau');
 
 $requeteMatchs->execute();
 $matchs = $requeteMatchs->fetchAll();

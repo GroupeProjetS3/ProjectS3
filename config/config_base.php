@@ -25,13 +25,14 @@
  --------------------------------------------------------------------------
  */
  if(!defined("RACINE_LIENS")){
-	 define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[3]);
+	 //define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[4]);
+	 define("RACINE_LIENS", "");
  }
  
  if (!defined("RACINE")){
 	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
 	$racineFinale = "";
-	for($i = 0; $i <= array_search("ProjectS3", $directories) ; $i++){
+	for($i = 0; $i <= array_search("public_html", $directories) ; $i++){
 		$racineFinale .= $directories[$i]."/";
 	}
 	define("RACINE", $racineFinale);
@@ -47,27 +48,27 @@ if (!defined("INC_DIR")) {
 }
 // emplacement par défaut des ressources
 if (!defined("RESOURCES_DIR")) {
-   define("RESOURCES_DIR",RACINE . "/ressources");
+   define("RESOURCES_DIR",RACINE . "ressources");
 }
 
 // emplacement par défaut des fichiers ajax
 if (!defined("AJAX_DIR")) {
-   define("AJAX_DIR",RACINE . "/ajax");
+   define("AJAX_DIR",RACINE . "ajax");
 }
 
 // emplacement par défaut des librairies
 if (!defined("LIB_DIR")) {
-   define("LIB_DIR",RACINE . "/lib");
+   define("LIB_DIR",RACINE . "lib");
 }
 
 // emplacement par défaut des fichiers javascript
 if (!defined("JS_DIR")) {
-   define("JS",RACINE . "/js");
+   define("JS",RACINE . "js");
 }
 
 // emplacement par défaut des fichiers css
 if (!defined("CSS_DIR")) {
-   define("CSS",RACINE . "/css");
+   define("CSS",RACINE . "css");
 }
 
 // emplacement par défaut des pages webs
@@ -78,12 +79,12 @@ if (!defined("FRONT_DIR")) {
 
 // emplacement par défaut des fichiers d'installation
 if (!defined("INSTALL_DIR")) {
-    define("INSTALL_DIR",RACINE . "/install");
+    define("INSTALL_DIR",RACINE . "install");
 }
 
 // emplacement par défaut des fichiers d'installation
 if (!defined("INSTALL_DB_DIR")) {
-    define("INSTALL_DB_DIR",INSTALL_DIR."/db");
+    define("INSTALL_DB_DIR",INSTALL_DIR."db");
 }
 
 /*

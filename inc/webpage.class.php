@@ -109,6 +109,7 @@ HTML
     <meta charset="utf-8">
     {$this->head}
     </head>
+        <body>
     <header>
         <div id ="divHaut">
             <h1>Site</h1>
@@ -116,7 +117,6 @@ HTML
         </div>
 
     </header>
-    <body>
     <div id="divMenu">
         <ul id="menu">
             <li><a href="{$this->racineLien}">Accueil</a></li>

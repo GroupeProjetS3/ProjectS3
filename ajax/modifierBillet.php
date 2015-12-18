@@ -24,31 +24,26 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+ 
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-require_once INC_DIR."/autoload.function.php";
+$content ="";
+$id = null;
+$name = "";
+if(isset($_GET['id']) && $_GET['id']!=null){
+  $id = $_GET['id'];
+  $request = new Request('SELECT', 'TypeBillet');
+  $request->setparams("id_typeBillet, libTypeBillet");
+  $request->setConditions("id_typeBillet = ".$id);
+  foreach($request->execute() as $billet) {
+    $name = $billet['libTypeBillet'];
+  }
+}else{
+  $content.="<h3>Ajout d'un nouveau billet</h3>";
+}
 
-$p = new Webpage("Gestion des Tournois");
-$p->appendCssUrl("../css/index.css");
-$p->appendJsUrl("../lib/jquery.min.js");
-
-
-$area = AJAX_DIR."/areaTournoi.php";
-$navigation = AJAX_DIR."/navigation.php";
-
-
-$content = <<<HTML
-    <div id="navigation"></div>
-    <div id="area"></div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#navigation").load('../ajax/navigation.php');
-        $("#area").load('../ajax/areaTournoi.php');
-    });
-</script>
+$content.=<<<HTML
+<input type='text' name='nom' value='{$name}'></input>
 HTML;
 
-
-$p->appendContent($content);
-
-echo $p->toHTML();
+echo($content);

@@ -29,6 +29,9 @@ $classe = null;
 
 require_once(INC_DIR."/autoload.function.php");
 
+// SUPRESSION DE L'ELEMENT MIS EN PARAMETRE
+
+/*
 if(isset($_GET['classe']) && !null == $_GET['classe']){
     $classe = $_GET['classe'];
     foreach($_GET as $id => $value){
@@ -37,3 +40,4 @@ if(isset($_GET['classe']) && !null == $_GET['classe']){
         }
     }
 }
+*/ echo "Suppression Effectuée";

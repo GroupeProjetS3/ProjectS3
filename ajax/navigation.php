@@ -27,7 +27,17 @@
 
 header("Content-Type: text/html; charset=UTF-8");
 
-$content.='';
-    // AJOUT DE LA FENETRE DE NAVIGATION VERS LES AUTRES ELEMENTS AJAX
+$content=<<<HTML
+    <ul>
+      <li><a href='tournois.php'>Tournois</a></li>
+      <li><a href='#'>Creneaux</a></li>
+      <li><a href='#'>Matchs</a></li>
+      <li><a href='#'>Droits</a></li>
+      <li><a href='#'>Terrains</a></li>
+      <li><a href='#'>Hebergement</a></li>
+      <li><a href='#'>Billeterie</a></li>
+    </ul>
+    
+HTML;
 
 echo $content;
