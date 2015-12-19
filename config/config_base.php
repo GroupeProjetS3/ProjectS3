@@ -25,14 +25,23 @@
  --------------------------------------------------------------------------
  */
  if(!defined("RACINE_LIENS")){
-	 //define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[4]);
-	 define("RACINE_LIENS", "");
+	 define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[3]);
+	 // define("RACINE_LIENS", "");
  }
+ 
+ // if (!defined("RACINE")){
+	// $directories = explode(DIRECTORY_SEPARATOR, __FILE__);
+	// $racineFinale = "";
+	// for($i = 0; $i <= array_search("public_html", $directories) ; $i++){
+		// $racineFinale .= $directories[$i]."/";
+	// }
+	// define("RACINE", $racineFinale);
+ // }
  
  if (!defined("RACINE")){
 	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
 	$racineFinale = "";
-	for($i = 0; $i <= array_search("public_html", $directories) ; $i++){
+	for($i = 0; $i <= array_search("ProjectS3", $directories) ; $i++){
 		$racineFinale .= $directories[$i]."/";
 	}
 	define("RACINE", $racineFinale);
