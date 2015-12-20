@@ -107,6 +107,10 @@ nav {
 .typesMatch{
 	display:none
 }
+
+.prix{
+	display:none
+}
 /*
 #droite{
 	box-sizing: border-box;

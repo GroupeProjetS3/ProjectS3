@@ -4,7 +4,7 @@ require_once(CONFIG_DIR."/config_db.php");
 require_once(INC_DIR."/autoload.function.php");
 
 
-$requeteMatchs = Connection_DB::getInstance()->prepare('SELECT id_match, DATE_FORMAT(day, "%d-%m-%Y") AS day, hDeb 
+$requeteMatchs = Connection_DB::getInstance()->prepare('SELECT id_match, DATE_FORMAT(day, "%d-%m-%Y") AS day, DATE_FORMAT(hDeb, "%H:%i") AS hDeb 
 								FROM infs3_prj13.creneau, infs3_prj13.match 
 								WHERE match.id_creneau=creneau.id_creneau');
 
