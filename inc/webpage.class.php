@@ -1,7 +1,6 @@
-<?php
 
+<?php
 class Webpage {
-	
     private $head  = null ;
     private $title = null ;
     private $body  = null ;
@@ -9,24 +8,21 @@ class Webpage {
     private $footer = null;
     private $nav = null ;
     private $menu = null ;
-	private $racineLien = null;
     // Les Choses accessibles en fonction de la connexion
     private $option = null;
     /**
      * Constructeur
      * @param string $title Le titre de la page
      */
-    public function __construct($title) {
-        $this->title = $title;
-        $this->appendToHead("<title>{$this->title}</title>");
-        /*if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
+    /*public function __construct($title) {
+        $this->title= $title;
+        if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
             $auth = "";
             $this->options = "";
         }else {
             $auth = "";
-        }*/
-		$this->racineLien = RACINE_LIENS;
-    }
+        }
+    }*/
     /**
      * Protéger les caractères spéciaux pouvant dégrader la page Web
      * @param string $string La chaîne à protéger
@@ -109,7 +105,6 @@ HTML
     <meta charset="utf-8">
     {$this->head}
     </head>
-        <body>
     <header>
         <div id ="divHaut">
             <h1>Site</h1>
@@ -119,21 +114,22 @@ HTML
     </header>
     <div id="divMenu">
         <ul id="menu">
-            <li><a href="{$this->racineLien}">Accueil</a></li>
+            <li><a href="../">Accueil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrains</a></li>
-			<li><a class="billetterie" href="{$this->racineLien}/front/billetterie.php">Billeterie</a></li>
+            <li><a href="">Billeterie</a></li>
             {$this->menu}
         </ul>
         <nav>
-            <li><a href="{$this->racineLien}">Acceuil</a></li>
+            <li><a href="">Acceuil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrain</a></li>
-            <li><a class="billetterie" href="{$this->racineLien}/front/billetterie.php">Billeterie</a></li>
+            <li><a href="">Billeterie</a></li>
             {$this->nav}
 
         </nav>
     </div>
+    <body>
    <div id='global'> 
     {$this->body}
     </div>

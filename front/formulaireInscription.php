@@ -1,14 +1,33 @@
 <?php
 
-include 'autoload.function.php';
+include '../inc/autoload.function.php';
 
 $p = new Webpage("Inscription");
 
 $p->appendCssUrl('../css/index.css');
 $p->appendBootstrap("../bootstrap");
 
+if(isset($_GET['pass'])) 
+	$p->appendContent(<<<HTML
+	<div class="alert alert-danger" role="alert"><b>Mots de passe incorrects</b></div>
+HTML
+);
+
+elseif(isset($_GET['mail'])) 
+	$p->appendContent(<<<HTML
+	<div class="alert alert-danger" role="alert"><b>Mail déjà utilisé</b></div>
+HTML
+);
+
+elseif(isset($_GET['login'])) 
+	$p->appendContent(<<<HTML
+	<div class="alert alert-danger" role="alert"><b>Pseudo déjà utilisé</b></div>
+HTML
+);
+
+
 $p->appendContent(<<<HTML
-	<form class="form-horizontal" name="inscription" method="POST" action="inscription.php">
+	<form class="form-horizontal" name="inscription" method="POST" action="../front/inscription.php">
 
 		<div class="form-group">
 			<label for="lastName" class="col-sm-2 control-label">Nom *</label>
@@ -23,6 +42,15 @@ $p->appendContent(<<<HTML
 				<input class="form-control" name="firstName" type="text" required>
 			</div>
 		</div>
+
+
+			<div class="form-group">
+			<label for="login" class="col-sm-2 control-label">Pseudo</label>
+			<div class="col-sm-4">
+				<input class="form-control" name="login" type="text" required>
+			</div>
+		</div>
+
 
 		<div class="form-group">
 			<label for="email" class="col-sm-2 control-label">Courriel *</label>
