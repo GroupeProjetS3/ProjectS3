@@ -24,27 +24,31 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+require_once("../config/config_base.php");
+require_once(CONFIG_DIR."/config_db.php");
+require_once INC_DIR."/autoload.function.php";
 
-abstract class DatabaseTestCase extends PHPUnit_Extensions_Database_TestCase
-{
-    // instancie pdo une seule fois
-    static private $pdo = null;
+$p = new Webpage("Gestion des Terrains");
+$p->appendCssUrl("../css/index.css");
+$p->appendJsUrl("../lib/jquery.min.js");
 
-    // instancie PHPUnit_Extensions_Database_DB_IDatabaseConnection une seule fois
-    private $conn = null;
 
-    final public function getConnection(){
-        if ($this->conn === null) {
-            if (self::$pdo == null) {
-                self::$pdo = new PDO("mysql:host=localhost;dbname=bulletproof","dbuser", "dbpass");
-            }
-            $this->conn = $this->createDefaultDBConnection(self::$pdo, 'testDatabase');
-        }
+$area = AJAX_DIR."/areaTerrains.php";
+$navigation = AJAX_DIR."/navigation.php";
 
-        return $this->conn;
-    }
 
-    public function getDataSet() {
-        return $this->createMySQLXMLDataSet(INSTALL_DB_DIR."/seed.xml");
-    }
-}
+$content = <<<HTML
+    <div id="navigation"></div>
+    <div id="area"></div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#navigation").load('../ajax/navigation.php');
+        $("#area").load('../ajax/areaTerrains.php');
+    });
+</script>
+HTML;
+
+
+$p->appendContent($content);
+
+echo $p->toHTML();
