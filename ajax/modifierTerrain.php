@@ -25,19 +25,8 @@
  --------------------------------------------------------------------------
  */
 
-header("Content-Type: text/html; charset=UTF-8");
+// CHARGE LE FORMULAIRE DE CREATION DE TOURNOI
+// SI UN TOURNOI EST MIS EN PARAMETRE ALORS CHARGER SES INFORMATIONS DANS LES CHAMPS
 
-$content=<<<HTML
-    <ul>
-      <li><a href='tournois.php'>Tournois</a></li>
-      <li><a href='#'>Creneaux</a></li>
-      <li><a href='#'>Matchs</a></li>
-      <li><a href='#'>Droits</a></li>
-      <li><a href='terrains.php'>Terrains</a></li>
-      <li><a href='#'>Hebergement</a></li>
-      <li><a href='typesBillets'>Billeterie</a></li>
-    </ul>
-    
-HTML;
-
-echo $content;
+var_dump($_GET);
+echo '<p>modification terrain</p>';

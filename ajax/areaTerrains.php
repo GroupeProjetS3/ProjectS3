@@ -33,13 +33,13 @@ header("Content-Type: text/html; charset=UTF-8");
 $content='<div><form>';
 $empty = true;
 $count = 0;
-$request = new Request('SELECT', 'TypeBillet');
-$request->setparams("id_typeBillet, libTypeBillet");
+$request = new Request('SELECT', 'Terrain');
+$request->setparams("id_terrain, name", "id_typeTerrain");
 
-        foreach($request->execute() as $billet) {
+        foreach($request->execute() as $terrain) {
             $content .=<<<HTML
-            <input type="checkbox" id="cb{$count}" value="{$billet['id_typeBillet']}">
-             <label for="cb{$count}">{$billet['libTypeBillet']}</label>
+            <input type="checkbox" id="cb{$count}" value="{$terrain['id_terrain']}">
+             <label for="cb{$count}">{$terrain['name']}</label>
 HTML;
             $count++;
         }
@@ -48,26 +48,21 @@ $content.=<<<HTML
     <button id="ajouter">Ajouter</button>
     <script type="text/javascript">
         $("#ajouter").click(function(){
-            $("#champ").load("../ajax/modifierBillet.php");
+            $("#champ").load("../ajax/modifierTerrain.php");
         });
-
     </script>
     
     <button id="modifier">Modifier</button>
     <script type="text/javascript">
        $("#modifier").click(function(){
-		$('#champ').html('');
 		var count = 0;
                 $('input[type="checkbox"]').each(function(){
 		  if (this.checked){
-		    $('#champ').append("<div id='q"+count+"'><div>");
-                    $("#q"+count).load("../ajax/modifierBillet.php?id="+$(this).attr('value'));
-                    count++;
+		    $('#champ').html($('#champ').html()+"<div id='q"+count+"'><div>");
+                    $("#q"+count).load("../ajax/modifierTerrain.php?id="+$(this).attr('value'));
                   }
+                  count++;
                 });
-                if(count > 0){
-		    $('#champ').append("<button id='sauvegarde'>Sauvegarder</button>");
-		 }
             });
       </script>
             
@@ -76,14 +71,11 @@ $content.=<<<HTML
           $("#supprimer").click(function(){
                 $("input[type='checkbox']").each(function(){
 		  if (this.checked){
-                    $.get("../ajax/supprimer?classe=Billet&id="+$(this).attr('value'));
-                    $("#area").load('../ajax/areaBillets.php');
+                    $.get("../ajax/supprimer?classe=Terrain&id="+$(this).attr('value'));
+                    $("#area").load('../ajax/areaTerrain.php');
                   }
                 });
             });
-</script>
-<script type="text/javascript">
-
 </script>
     <div id='champ'></div>
 HTML;
