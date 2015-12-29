@@ -5,33 +5,71 @@ require_once(INC_DIR."/autoload.function.php");
 
 $page = new WebPage("Validation Achat des Billets");
 $page->appendCssUrl("../css/index.css");
-$page->appendJsUrl("../js/liens.js");
-/*
-$pdo = myPDO::getInstance();
-$stmt = $pdo->prepare(<<<SQL
-			SELECT *
-			FROM TypeBillet
-SQL
-);
-$stmt->execute();
-$results = $stmt->fetchAll();
-$billets = array();
-foreach($results as $result){
-	array_push($billets,new Billet($result['libTypeBillet']));
-}
-*/
 
-$typesBillets = new TypeBillet();
-$types = $typesBillets->getType();
+$matchs=array();
+$types=array();
+$quantites=array();
+// var_dump($_POST);
+$requeteMatchs = Connection_DB::getInstance()->prepare(
+								'SELECT DATE_FORMAT(day, "%d-%m-%Y") AS day
+								FROM infs3_prj13.creneau, infs3_prj13.match 
+								WHERE match.id_creneau=creneau.id_creneau
+								AND match.id_match=?'
+								);
+								
+$requeteTypes = Connection_DB::getInstance()->prepare(
+								'SELECT libTypeBillet
+								FROM infs3_prj13.typebillet
+								WHERE id_typeBillet = ?'
+								);
 
-foreach($types as $type){
-	$typePOST= str_replace(' ', '_', $type);
-	if(isset($_POST["{$typePOST}"])){
-		if($_POST["{$typePOST}"]!=null){
-			$quantite=$_POST["{$typePOST}"];
-			$page->appendContent("<p>{$type} = {$quantite}</p>");
+$requetePrix = Connection_DB::getInstance()->prepare(
+								'SELECT prixBillet AS prix
+								FROM infs3_prj13.disponibilite
+								WHERE id_match=?
+								AND id_typeBillet=?'
+								);
+
+foreach($_POST as $key =>$value){
+	if(preg_match('#match#', $key)===1){
+		$match=$value;
+	}else if(preg_match('#type#', $key)===1){
+		array_push($types, [$match, $value]); 
+	}else if(preg_match('#quantite#', $key)===1){
+		if(!empty($_POST[$key])){
+			array_push($quantites, $value);
 		}
 	}
 }
-$page->appendContent("<script type='text/javascript' language='javascript'>billetterie()</script>");
+
+$prixFinal =0;
+
+for($i=0; $i<sizeof($quantites); $i++){
+	$requeteTypes->execute(array($types[$i][1]));
+	$type = $requeteTypes->fetchAll();
+	foreach($type as $t){
+		$t=$t['libTypeBillet'];
+	}
+	
+	$requeteMatchs->execute(array($types[$i][0]));
+	$match = $requeteMatchs->fetchAll();
+	foreach($match as $m){
+		$m=$m['day'];
+	}
+	
+	$requetePrix->execute(array($types[$i][0],$types[$i][1]));
+	$prix = $requetePrix->fetchAll();
+	foreach($prix as $p){
+		$p=$p['prix'];
+	}
+	
+	$total=$p*$quantites[$i];
+	
+	$page->appendContent("<p>{$quantites[$i]} billet(s) {$t} pour le match du {$m}. Prix : ".number_format($total,2,",",".")." €</p>");
+	
+	$prixFinal+=$total;
+}
+
+$page->appendContent("<p>Total : ".number_format($prixFinal, 2 ,',','.')." €</p>");
+
 echo $page->toHTML();
