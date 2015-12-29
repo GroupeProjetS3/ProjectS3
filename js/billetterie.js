@@ -28,15 +28,15 @@ $(function(){
 					.html('Match du ' + match.day + ' Début du match : ' + match.hDeb)
 					.appendTo('fieldset #match'+id_match);
 
-			$('<div>', {id: 'typesMatch'+id_match})
-				.appendTo('fieldset #match'+id_match);
-					
-				$.post('types.request.php', 
-				{
-					id_match:id_match
-				}, 
-				function(types){chargeTypes(types)}, 
-				'json');
+				$('<div>', {id: 'typesMatch'+id_match})
+					.appendTo('fieldset #match'+id_match);
+						
+					$.post('types.request.php', 
+					{
+						id_match:id_match
+					}, 
+					function(types){chargeTypes(types)}, 
+					'json');
 				
 			$('#typesMatch'+id_match).hide();
 
@@ -54,6 +54,12 @@ $(function(){
 				}
 				else{
 					$(this).parent().children('#typesMatch'+id_match).hide();
+					$('#typesMatch'+id_match+' input').each(function(){
+						if($(this).is(':checked')){
+							$(this).prop('checked',false);
+							$(this).parent().children('div[id^="prix"]').hide();
+						}
+					});
 					
 				}
 			})
@@ -78,7 +84,7 @@ $(function(){
 				$('<input>', {type:'checkbox', value:id_typeBillet, id:'type_'+id_typeBillet, name:id_match+'_type_'+id_typeBillet,})
 					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet);
 			
-				$('<label>', {for:'#typesMatch'+id_match+' #type'+id_typeBillet})
+				$('<label>', {for:id_match+'_type_'+id_typeBillet})
 					.html(libTypeBillet)
 					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet);
 			
