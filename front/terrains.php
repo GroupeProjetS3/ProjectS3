@@ -24,20 +24,26 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+require_once("../config/config_base.php");
+require_once(CONFIG_DIR."/config_db.php");
+require_once INC_DIR."/autoload.function.php";
 
-header("Content-Type: text/html; charset=UTF-8");
+$p = new Webpage("Gestion des Terrains");
+$p->appendCssUrl("../css/index.css");
+$p->appendJsUrl("../lib/jquery.min.js");
 
-$content=<<<HTML
-    <ul>
-      <li><a href='tournois.php'>Tournois</a></li>
-      <li><a href='#'>Creneaux</a></li>
-      <li><a href='matchs.php'>Matchs</a></li>
-      <li><a href='#'>Droits</a></li>
-      <li><a href='terrains.php'>Terrains</a></li>
-      <li><a href='#'>Hebergement</a></li>
-      <li><a href='typesBillets'>Billeterie</a></li>
-    </ul>
-    
+$content = <<<HTML
+    <div id="navigation"></div>
+    <div id="area"></div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#navigation").load('../ajax/navigation.php');
+        $("#area").load('../ajax/areaTerrains.php');
+    });
+</script>
 HTML;
 
-echo $content;
+
+$p->appendContent($content);
+
+echo $p->toHTML();

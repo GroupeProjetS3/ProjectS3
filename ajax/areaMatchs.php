@@ -24,31 +24,17 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-require_once INC_DIR."/autoload.function.php";
+ 
+header("Content-Type: text/html; charset=UTF-8");
 
-$p = new Webpage("Gestion des Terrains");
-$p->appendCssUrl("../css/index.css");
-$p->appendJsUrl("../lib/jquery.min.js");
-
-
-$area = AJAX_DIR."/areaTerrains.php";
-$navigation = AJAX_DIR."/navigation.php";
-
-
-$content = <<<HTML
-    <div id="navigation"></div>
-    <div id="area"></div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("#navigation").load('../ajax/navigation.php');
-        $("#area").load('../ajax/areaTerrains.php');
-    });
-</script>
-HTML;
+$content='';
+// AFFICHAGE BOUTON COMPETION POUR SELECTIONNER LA COMPETIION
+// AJOUT A CONTENT DE LA REQUETE SQL POUR AFFICHER TOUT LES MATCHS D'UNE COMPETITION
+// AJOUT DE LA FONCTION AJOUTER SCORE (modifiera le match associé et mettra à jour les autres matchs)
+// AJOUT DE LA FONCTION GENERER MATCHS (modifiera les matchs pour générer le tournoi)
 
 
-$p->appendContent($content);
-
-echo $p->toHTML();
+echo $content;
