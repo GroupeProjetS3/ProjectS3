@@ -1,7 +1,11 @@
 <?php
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-require_once(INC_DIR."/autoload.function.php");
+require_once INC_DIR."/autoload.function.php";
+
+$p = new Webpage("Gestion des Matchs");
+$p->appendCssUrl("../css/index.css");
+$p->appendJsUrl("../lib/jquery.min.js");
 
 $content = <<<HTML
     <div id="navigation"></div>

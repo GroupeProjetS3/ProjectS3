@@ -24,20 +24,22 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+ 
+ 
  if(!defined("RACINE_LIENS")){
 	 define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[3]);
 	 // define("RACINE_LIENS", "");
  }
  
- // if (!defined("RACINE")){
-	// $directories = explode(DIRECTORY_SEPARATOR, __FILE__);
-	// $racineFinale = "";
-	// for($i = 0; $i <= array_search("public_html", $directories) ; $i++){
-		// $racineFinale .= $directories[$i]."/";
-	// }
-	// define("RACINE", $racineFinale);
- // }
- 
+ if (!defined("RACINE")){
+	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
+	$racineFinale = "";
+	for($i = 0; $i <= array_search("public_html", $directories) ; $i++){
+		$racineFinale .= $directories[$i]."/";
+	}
+	define("RACINE", $racineFinale);
+ }
+ /*
  if (!defined("RACINE")){
 	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
 	$racineFinale = "";
@@ -46,6 +48,8 @@
 	}
 	define("RACINE", $racineFinale);
  }
+ */
+ 
 // emplacement par défaut des fichiers de configuration
 if (!defined("CONFIG_DIR")) {
    define("CONFIG_DIR",RACINE . "config");

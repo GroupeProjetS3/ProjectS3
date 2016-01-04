@@ -114,7 +114,7 @@ HTML
     </header>
     <div id="divMenu">
         <ul id="menu">
-            <li><a href="../">Accueil</a></li>
+            <li><a href="">Accueil</a></li>
             <li><a href="">Planning</a></li>
             <li><a href="">Terrains</a></li>
             <li><a href="">Billeterie</a></li>

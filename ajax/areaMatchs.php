@@ -30,11 +30,108 @@ require_once(CONFIG_DIR."/config_db.php");
  
 header("Content-Type: text/html; charset=UTF-8");
 
-$content='';
-// AFFICHAGE BOUTON COMPETION POUR SELECTIONNER LA COMPETIION
-// AJOUT A CONTENT DE LA REQUETE SQL POUR AFFICHER TOUT LES MATCHS D'UNE COMPETITION
-// AJOUT DE LA FONCTION AJOUTER SCORE (modifiera le match associé et mettra à jour les autres matchs)
-// AJOUT DE LA FONCTION GENERER MATCHS (modifiera les matchs pour générer le tournoi)
+$content='<select id="competition">';
+if(isset($_GET['id'])&& $_GET['id']!=null){
+	$content.= '<option id="..." value="">Competitions...</option>';
+}else{
+  $content.= '<option id="..." value="" selected>Competitions...</option>';
+}
 
 
+$request = new Request('SELECT', 'Competition, TypeCompetition');
+$request->setparams("id_competition, libType");
+$request->setConditions("Competition.id_typeCompetition = TypeCompetition.id_typeCompetition");
+foreach($request->execute() as $competition) {
+	if(isset($_GET['id'])&& $_GET['id']!=null && $_GET['id']==$competition['id_competition']){
+		$content.='<option value="'.$competition['id_competition'].'" id="'.$competition['id_competition'].'" selected>'.$competition['libType'].'</option>';
+	}else{
+		$content.='<option value="'.$competition['id_competition'].'" id="'.$competition['id_competition'].'">'.$competition['libType'].'</option>';
+	}
+}
+$content.=<<<HTML
+  </select>
+  <div id='matchs'>
+  <script type="text/javascript">
+	 $("#competition").change(function(){
+                  $("option").each(function(){
+			if (this.selected){
+			$("#area").load('../ajax/areaMatchs.php?id='+this.value);
+                  }
+                });
+            });
+	
+  </script>
+HTML;
+
+if(isset($_GET['id'])&& $_GET['id']!=null){
+	$request = new Request('SELECT', 'infs3_prj13.Match');
+	$request->setparams("*");
+	$request->setConditions("id_competition = ".$_GET['id']);
+	$count = 0;
+	foreach($request->execute() as $match) {
+	$content .=<<<HTML
+            <input type="checkbox" id="cb{$count}" value="{$match['id_match']}">
+             <label for="cb{$count}">( {$match['rang']} , {$match['ordre']} )</label>
+HTML;
+            $count++;
+        }
+}
+$content.=<<<HTML
+  </div>
+    <button id="ajouter">Ajouter</button>
+    <script type="text/javascript">
+        $("#ajouter").click(function(){
+            $("#champ").load("../ajax/modifierMatch.php");
+        });
+
+    </script>
+    
+    <button id="modifier">Modifier</button>
+    <script type="text/javascript">
+       $("#modifier").click(function(){
+		$('#champ').html('');
+		var count = 0;
+                $('input[type="checkbox"]').each(function(){
+		  if (this.checked){
+		    $('#champ').append("<div id='q"+count+"'><div>");
+                    $("#q"+count).load("../ajax/modifierMatch.php?id="+$(this).attr('value'));
+                    count++;
+                  }
+                });
+                if(count > 0){
+		    $('#champ').append("<button id='sauvegarde'>Sauvegarder</button>");
+		 }
+            });
+      </script>
+            
+    <button id="supprimer">Supprimer</button>
+    <script type="text/javascript">
+          $("#supprimer").click(function(){
+                $("input[type='checkbox']").each(function(){
+		  if (this.checked){
+                    $.get("../ajax/supprimer?classe=Billet&id="+$(this).attr('value'));
+                    $("#area").load('../ajax/areaMatch.php');
+                  }
+                });
+            });
+</script>
+<button id="score">Score</button>
+    <script type="text/javascript">
+          $("#score").click(function(){
+		$('#champ').html('');
+		var count = 0;
+                $("input[type='checkbox']").each(function(){
+		  if (this.checked){
+                    $('#champ').append("<div id='q"+count+"'><div>");
+                    $("#q"+count).load("../ajax/gererScore.php?id="+$(this).attr('value'));
+                    count++;
+                  }
+                });
+                if(count > 0){
+		    $('#champ').append("<button id='sauvegarde'>Sauvegarder</button>");
+		 }
+            });
+</script>
+    <div id='champ'></div>
+HTML;
 echo $content;
