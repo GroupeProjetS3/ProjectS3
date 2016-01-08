@@ -218,16 +218,16 @@ class User extends entity{
 
      public static function loginForm($action){
        return (<<<HTML
-<form action="$action" method="POST">
- <div class="form-group">
-   <label>Email address</label>
-   <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+<form action="$action" method="POST" class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Adresse Mail</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Mot de passe</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
  </div>
- <div class="form-group">
-   <label>Password</label>
-   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
- </div>
- <button type="submit" class="btn btn-default">Submit</button>
+ <button type="submit" class="btn btn-default">Valider</button>
 </form>
 HTML
 );

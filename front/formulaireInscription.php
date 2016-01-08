@@ -27,7 +27,7 @@ HTML
 
 
 $p->appendContent(<<<HTML
-	<form class="form-horizontal" name="inscription" method="POST" action="../front/inscription.php">
+	<form class="form-horizontal" name="inscription" method="POST" action="../inc/inscription.php">
 
 		<div class="form-group">
 			<label for="lastName" class="col-sm-2 control-label">Nom *</label>
@@ -44,7 +44,7 @@ $p->appendContent(<<<HTML
 		</div>
 
 
-			<div class="form-group">
+		<div class="form-group">
 			<label for="login" class="col-sm-2 control-label">Pseudo</label>
 			<div class="col-sm-4">
 				<input class="form-control" name="login" type="text" required>

@@ -4,10 +4,10 @@ require_once(CONFIG_DIR."/config_db.php");
 require_once(INC_DIR."/autoload.function.php");
 
 $requeteTypes = Connection_DB::getInstance()->prepare(
-	'SELECT typebillet.libTypeBillet, typebillet.id_typeBillet, disponibilite.id_match, disponibilite.prixBillet, disponibilite.nbBilletsDispo
-	FROM infs3_prj13.disponibilite, infs3_prj13.typebillet 
-	WHERE disponibilite.id_typeBillet=typebillet.id_typeBillet
-	AND disponibilite.id_match=?'
+	'SELECT TypeBillet.libTypeBillet, TypeBillet.id_typeBillet, Disponibilite.id_match, Disponibilite.prixBillet, Disponibilite.nbBilletsDispo
+	FROM infs3_prj13.Disponibilite, infs3_prj13.TypeBillet 
+	WHERE Disponibilite.id_typeBillet=TypeBillet.id_typeBillet
+	AND Disponibilite.id_match=?'
 );
 
 $requeteTypes->execute(array($_POST['id_match']));

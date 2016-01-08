@@ -105,32 +105,43 @@ HTML
     <head>
     <meta charset="utf-8">
 	<title>{$this->title}</title>
-    {$this->head}
+	{$this->head}
+	<script type='text/javascript' src='../bootstrap/dist/js/bootstrap.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.css">
     </head>
     <header>
         <div id ="divHaut">
-            <h1>Site</h1>
+        <div class="row">
+           <div class="col-xs-3">
+	     <h1>Site</h1>
+	   </div>
+	    <div class="col-xs-4">
            {$this->header}
+           </div>
+           <div class="col-xs-5">
+HTML
+;
+	     $html .= User::loginForm('Authentification.php');
+	     $html .= <<<HTML
+	     <a href="../front/formulaireInscription.php">Inscription</a>
+	   </div>
+	   
+          </div>
         </div>
 
     </header>
     <body>
 		<div id="divMenu">
 			<ul id="menu">
-				<li><a href="">Accueil</a></li>
-				<li><a href="">Planning</a></li>
-				<li><a href="">Terrains</a></li>
-				<li><a href="">Billeterie</a></li>
+				<li><a href="../index.php">Accueil</a></li>
+				<li><a href="#">Horaires</a></li>
+				<li><a href="#">Terrains</a></li>
+				<li><a href="../front/billetterie.php">Billetterie</a></li>
+				<li><a href="#">Resultats</a></li>
 				{$this->menu}
 			</ul>
-			<nav>
-				<li><a href="">Accueil</a></li>
-				<li><a href="">Planning</a></li>
-				<li><a href="">Terrain</a></li>
-				<li><a href="">Billeterie</a></li>
-				{$this->nav}
-
-			</nav>
 		</div>
 		<div id="global">
 			{$this->body}

@@ -11,7 +11,14 @@ html {
 }
 body {
   margin: 0;
+  background: -moz-linear-gradient(right, rgb(255, 219, 34), rgb(255, 127, 34));
+   background: -webkit-linear-gradient(right, rgb(255, 219, 34), rgb(255, 127, 34));
 }
+
+#global{
+  margin : 1% 5%;
+}
+
 article,
 aside,
 details,

@@ -1,38 +1,51 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: corentinfievet
+ * Date: 21/12/15
+ * Time: 11:35
+ */
 require_once("config/config_base.php");
-include 'inc/autoload.function.php';
-$p = new Webpage("Page d'accueil");
+require_once(INC_DIR."/autoload.function.php");
 
-$p->appendCssUrl('css/index.css');
-$p->appendJsUrl('js/liens.js');
-$p->appendBootstrap("bootstrap");
+    $p = new webPage('Accueil');
+    
+    
+    $p->appendCssUrl('/css/index.css');
 
-$p->appendContent(<<<HTML
-	<div id="global">
-		<div id="presentation">
-			Notre tournoi contient tant de joueur sur tant de terrain de tant à tant
-		</div>
-
-		<div id="arbre">
-			arbre tournoi
-		</div>
-		<div id="matchs">
-			Matchs du jour
-		</div>
-
-		<div class="box">
-			billeterie
-		</div>
-
-		<div class="box">
-			News
-		</div>
-
-		<div class="box">
-			joueur
-		</div>
-	</div>
+    $p->appendContent(<<<HTML
+        <div id="titre">
+            Arbre du tournoi
+        </div>
+         <div id="prem">
+            Arbre du tournoi
+        </div>
+        <div id="titre">
+            billeterie
+        </div>
+         <div id="test">
+             Billeterie
+        </div>
+        <div id="titre">
+            News
+        </div>
+         <div id="test">
+            News
+        </div>
+        <div id="titre">
+            Match du jour
+        </div>
+         <div id="test">
+             Matchs
+        </div>
+        <div id="titre">
+            Joueurs
+        </div>
+         <div id="test">
+            Joueurs
+        </div>
 HTML
+
 );
 
-echo $p->toHTML();
+    echo $p->toHTML();

@@ -12,20 +12,20 @@ $quantites=array();
 // var_dump($_POST);
 $requeteMatchs = Connection_DB::getInstance()->prepare(
 								'SELECT DATE_FORMAT(day, "%d-%m-%Y") AS day
-								FROM infs3_prj13.creneau, infs3_prj13.match 
-								WHERE match.id_creneau=creneau.id_creneau
-								AND match.id_match=?'
+								FROM infs3_prj13.Creneau, infs3_prj13.Match 
+								WHERE Match.id_creneau=Creneau.id_creneau
+								AND Match.id_match=?'
 								);
 								
 $requeteTypes = Connection_DB::getInstance()->prepare(
 								'SELECT libTypeBillet
-								FROM infs3_prj13.typebillet
+								FROM infs3_prj13.TypeBillet
 								WHERE id_typeBillet = ?'
 								);
 
 $requetePrix = Connection_DB::getInstance()->prepare(
 								'SELECT prixBillet AS prix
-								FROM infs3_prj13.disponibilite
+								FROM infs3_prj13.Disponibilite
 								WHERE id_match=?
 								AND id_typeBillet=?'
 								);
