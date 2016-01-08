@@ -1,4 +1,4 @@
-i<?php
+<?php
 /*
  -------------------------------------------------------------------------
  Project S3 - Gestionnaire de tournois de Tennis
@@ -24,15 +24,26 @@ i<?php
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
- 
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-$content ="";
+require_once INC_DIR."/autoload.function.php";
 
-// récupérer le type de compétition à partir du match
+$p = new Webpage("Gestion des Creneaux");
+$p->appendCssUrl("../css/index.css");
+$p->appendJsUrl("../lib/jquery.min.js");
 
-// récupérer pour le match, l'id des joueurs (a gérer si match simple ou double)
+$content = <<<HTML
+    <div id="navigation"></div>
+    <div id="area"></div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#navigation").load('../ajax/navigation.php');
+        $("#area").load('../ajax/areaCreneaux.php');
+    });
+</script>
+HTML;
 
-// champs textes permettant de modifier les valeurs de score de l'utilisateur
 
-echo($content);
+$p->appendContent($content);
+
+echo $p->toHTML();

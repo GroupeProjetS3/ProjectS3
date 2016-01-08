@@ -99,7 +99,7 @@ $content.=<<<HTML
                   }
                 });
                 if(count > 0){
-		    $('#champ').append("<button id='sauvegarde'>Sauvegarder</button>");
+		    $('#champ').append("<button id='edition'>Sauvegarder</button>");
 		 }
             });
       </script>
@@ -109,7 +109,7 @@ $content.=<<<HTML
           $("#supprimer").click(function(){
                 $("input[type='checkbox']").each(function(){
 		  if (this.checked){
-                    $.get("../ajax/supprimer?classe=Billet&id="+$(this).attr('value'));
+                    $.get("../ajax/supprimer?classe=Match&id="+$(this).attr('value'));
                     $("#area").load('../ajax/areaMatch.php');
                   }
                 });
@@ -128,7 +128,7 @@ $content.=<<<HTML
                   }
                 });
                 if(count > 0){
-		    $('#champ').append("<button id='sauvegarde'>Sauvegarder</button>");
+		    $('#champ').append("<button id='scoreEdit'>Sauvegarder</button>");
 		 }
             });
 </script>

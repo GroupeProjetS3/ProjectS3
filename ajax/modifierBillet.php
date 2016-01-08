@@ -36,6 +36,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
   $request->setparams("id_typeBillet, libTypeBillet");
   $request->setConditions("id_typeBillet = ".$id);
   foreach($request->execute() as $billet) {
+    $id = $billet['id_typeBillet'];
     $name = $billet['libTypeBillet'];
   }
 }else{
@@ -43,7 +44,7 @@ if(isset($_GET['id']) && $_GET['id']!=null){
 }
 
 $content.=<<<HTML
-<input type='text' name='nom' value='{$name}'></input>
+<input type='text' id="{$id}" name='libTypeBillet' value='{$name}'></input>
 HTML;
 
 echo($content);

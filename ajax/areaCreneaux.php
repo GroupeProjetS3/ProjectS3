@@ -33,13 +33,13 @@ header("Content-Type: text/html; charset=UTF-8");
 $content='<div><form>';
 $empty = true;
 $count = 0;
-$request = new Request('SELECT', 'TypeBillet');
-$request->setparams("id_typeBillet, libTypeBillet");
+$request = new Request('SELECT', 'Creneau');
+$request->setparams("*");
 
-        foreach($request->execute() as $billet) {
+        foreach($request->execute() as $creneau) {
             $content .=<<<HTML
-            <input type="checkbox" id="cb{$count}" value="{$billet['id_typeBillet']}">
-             <label for="cb{$count}">{$billet['libTypeBillet']}</label>
+            <input type="checkbox" id="cb{$count}" value="{$creneau['id_creneau']}">
+             <label for="cb{$count}">{$creneau['day']}, {$creneau['hDeb']}</label>
 HTML;
             $count++;
         }
@@ -48,28 +48,21 @@ $content.=<<<HTML
     <button id="ajouter">Ajouter</button>
     <script type="text/javascript">
         $("#ajouter").click(function(){
-            $("#champ").load("../ajax/modifierBillet.php");
-            $('#saveDiv').html("<button id='add'>Sauvegarder</button>");
+            $("#champ").load("../ajax/modifierCreneau.php");
         });
-
     </script>
     
     <button id="modifier">Modifier</button>
     <script type="text/javascript">
        $("#modifier").click(function(){
-		$('#champ').html('');
-		$('#saveDiv').html('');
 		var count = 0;
                 $('input[type="checkbox"]').each(function(){
 		  if (this.checked){
-		    $('#champ').append("<div id='q"+count+"'><div>");
-                    $("#q"+count).load("../ajax/modifierBillet.php?id="+$(this).attr('value'));
-                    count++;
+		    $('#champ').html($('#champ').html()+"<div id='q"+count+"'><div>");
+                    $("#q"+count).load("../ajax/modifierCreneau.php?id="+$(this).attr('value'));
                   }
+                  count++;
                 });
-                if(count > 0){
-		    $('#saveDiv').html('<button id="edition">Sauvegarder</button>');
-		 }
             });
       </script>
             
@@ -78,30 +71,13 @@ $content.=<<<HTML
           $("#supprimer").click(function(){
                 $("input[type='checkbox']").each(function(){
 		  if (this.checked){
-                    $.get("../ajax/supprimer?classe=Billet&id="+$(this).attr('value'));
-                    $("#area").load('../ajax/areaBillets.php');
+                    $.get("../ajax/supprimer?classe=Creneau&id="+$(this).attr('value'));
+                    $("#area").load('../ajax/areaCreneaux.php');
                   }
                 });
             });
 </script>
     <div id='champ'></div>
-    <div id='saveDiv'></div>
-<script type="text/javascript">
-  $("#saveDiv").click(function(){
-    if($(this).find("button").attr("id") == "edition"){
-      $("input[type='text']").each(function(){
-	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val()+'"}';
-	$("#champ").load('../ajax/update_db.php?classe=TypeBillet&id='+$(this).attr('id')+'&data='+data);
-      });
-    }else{
-      $("input[type='text']").each(function(){
- 	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val()+'"}';
-	$("#champ").load('../ajax/insert_db.php?classe=TypeBillet&data='+data);
-      });
-    }
-  $("#saveDiv").html("");
-  });
-</script>
 HTML;
 
 

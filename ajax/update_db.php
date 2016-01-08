@@ -1,4 +1,4 @@
-i<?php
+<?php
 /*
  -------------------------------------------------------------------------
  Project S3 - Gestionnaire de tournois de Tennis
@@ -24,15 +24,34 @@ i<?php
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
- 
+
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-$content ="";
+require_once(INC_DIR."/autoload.function.php");
 
-// récupérer le type de compétition à partir du match
+$content ="Update effectuée";
 
-// récupérer pour le match, l'id des joueurs (a gérer si match simple ou double)
+if(isset($_GET['classe']) && $_GET['classe'] != null && isset($_GET['id']) && $_GET['id'] != null && isset($_GET['data']) && $_GET['data'] != null){
 
-// champs textes permettant de modifier les valeurs de score de l'utilisateur
+  $data = json_decode($_GET['data']);
+  $request = new Request('UPDATE', $_GET['classe']);
+  $request->setparams($data);
+  switch($_GET['classe']){
+    case : 
+    break;
+    case :
+    break;
+    case :
+    break;
+    case :
+    break;
+    case :
+    break;
+  }
+  $request->setConditions("id = ".$_GET['id']);
+  $request->execute();
 
-echo($content);
+}else{
+  $content = "Erreur lors de l'update";
+}
+echo $content;

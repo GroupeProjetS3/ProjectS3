@@ -24,9 +24,11 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-
-// CHARGE LE FORMULAIRE DE CREATION DE TOURNOI
-// SI UN TOURNOI EST MIS EN PARAMETRE ALORS CHARGER SES INFORMATIONS DANS LES CHAMPS
+ 
+require_once("../config/config_base.php");
+require_once(CONFIG_DIR."/config_db.php");
+$content ="";
 
 var_dump($_GET);
-echo '<p>modification tournoi</p>';
+
+echo($content);

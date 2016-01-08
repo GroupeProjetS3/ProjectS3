@@ -30,11 +30,9 @@ header("Content-Type: text/html; charset=UTF-8");
 $content=<<<HTML
     <ul>
       <li><a href='tournois.php'>Tournois</a></li>
-      <li><a href='#'>Creneaux</a></li>
+      <li><a href='creneaux.php'>Creneaux</a></li>
       <li><a href='matchs.php'>Matchs</a></li>
-      <li><a href='#'>Droits</a></li>
       <li><a href='terrains.php'>Terrains</a></li>
-      <li><a href='#'>Hebergement</a></li>
       <li><a href='typesBillets'>Billeterie</a></li>
     </ul>
     

@@ -1,4 +1,4 @@
-i<?php
+<?php
 /*
  -------------------------------------------------------------------------
  Project S3 - Gestionnaire de tournois de Tennis
@@ -27,12 +27,29 @@ i<?php
  
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-$content ="";
+require_once(INC_DIR."/autoload.function.php");
 
-// récupérer le type de compétition à partir du match
+if(isset($_GET['classe']) && $_GET['classe']!=null &&isset($_GET['data']) && $_GET['data']){
+  $data = json_decode($_GET['data']);
+  $columns = "(";
+          $values = "VALUES (";
+          foreach($data as $key => $value){
+              $columns.=$key.",";
+              if(is_string($value)){
+		$values.="'".$value."',";
+              }else{
+		$values.= $value.",";
+              }
+          }
+          $columns = substr($columns, 0, -1).") ";
+          $values = substr($values, 0, -1).")";
+  $connection = Connection_DB::getInstance();
+  $sql = "INSERT INTO ".$_GET['classe']." ".$columns.$values;
+          $stmt = $connection->prepare($sql);
+          $stmt->execute();
+}else{
+  echo "Echec de l'insertion";
+}
 
-// récupérer pour le match, l'id des joueurs (a gérer si match simple ou double)
 
-// champs textes permettant de modifier les valeurs de score de l'utilisateur
-
-echo($content);
+echo "Insertion Effectuée";
