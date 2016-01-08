@@ -6,6 +6,7 @@ $(function(){
 			'json');
 	
 	function chargeMatchs(matchs){
+		console.log('bonjour');
 		$('<fieldset>')
 			.appendTo('#billets');
 		
@@ -60,12 +61,24 @@ $(function(){
 							$(this).parent().children('div[id^="prix"]').hide();
 						}
 					});
-					
+					$('#typesMatch'+id_match+' select').each(function(){
+						$(this).val("").attr('selected', true);
+					});
 				}
 			})
 		})
 
-		$('<button>', {type:'submit'}).html('Valider').appendTo('#billets');
+		$('<input>', {type:'button', value:'Valider'})
+			.appendTo('#billets')
+			.click(function(){
+				$('select').each(function(){
+					console.log($(this).val()!="")
+					if($(this).val()!=""){
+						console.log('top');
+						$('#billets').submit();
+					}
+				})
+			});
 		
 	}
 	
@@ -81,7 +94,7 @@ $(function(){
 			$('<div>', {id:'type'+id_typeBillet})
 				.appendTo('#match'+id_match+' #typesMatch'+id_match);
 			
-				$('<input>', {type:'checkbox', value:id_typeBillet, id:'type_'+id_typeBillet, name:id_match+'_type_'+id_typeBillet,})
+				$('<input>', {type:'checkbox', value:id_typeBillet, id:'type_'+id_typeBillet, name:id_match+'_type_'+id_typeBillet})
 					.appendTo('#typesMatch'+id_match+' #type'+id_typeBillet);
 			
 				$('<label>', {for:id_match+'_type_'+id_typeBillet})
@@ -104,7 +117,7 @@ $(function(){
 							
 							$('#typesMatch'+id_match+' #quantite_'+id_typeBillet).append(new Option('', ''));
 							
-							for(var j=0; j<=type.nbBilletsDispo; j++){
+							for(var j=1; j<=type.nbBilletsDispo; j++){
 								$('#typesMatch'+id_match+' #quantite_'+id_typeBillet).append(new Option(j, j));
 							}
 			
@@ -119,6 +132,7 @@ $(function(){
 				}
 				else{
 					$(this).parent().children('#prix'+id_typeBillet).hide();
+					$(this).parent().children('#prix'+id_typeBillet).children('#quantite'+id_typeBillet).children('#quantite_'+id_typeBillet).val("").attr('selected', true);
 				}
 			})
 		})

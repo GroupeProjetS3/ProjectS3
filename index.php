@@ -8,34 +8,30 @@ $p->appendJsUrl('js/liens.js');
 $p->appendBootstrap("bootstrap");
 
 $p->appendContent(<<<HTML
-	<body>
-	    <div id="global">
-            <div id="presentation">
-                Notre tournoi contient tant de joueur sur tant de terrain de tant à tant
-            </div>
-
-            <div id="arbre">
-                arbre tournoi
-            </div>
-            <div id="matchs">
-                Matchs du jour
-            </div>
-
-            <div class="box">
-                billeterie
-            </div>
-
-            <div class="box">
-                News
-            </div>
-
-            <div class="box">
-                joueur
-            </div>
+	<div id="global">
+		<div id="presentation">
+			Notre tournoi contient tant de joueur sur tant de terrain de tant à tant
 		</div>
-	</body>
-	<footer>
-    </footer>
+
+		<div id="arbre">
+			arbre tournoi
+		</div>
+		<div id="matchs">
+			Matchs du jour
+		</div>
+
+		<div class="box">
+			billeterie
+		</div>
+
+		<div class="box">
+			News
+		</div>
+
+		<div class="box">
+			joueur
+		</div>
+	</div>
 HTML
 );
 

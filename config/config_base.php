@@ -30,7 +30,7 @@
 	 define("RACINE_LIENS", "/".explode(DIRECTORY_SEPARATOR, dirname(__FILE__))[3]);
 	 // define("RACINE_LIENS", "");
  }
- 
+ /*
  if (!defined("RACINE")){
 	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
 	$racineFinale = "";
@@ -39,7 +39,7 @@
 	}
 	define("RACINE", $racineFinale);
  }
- /*
+ */
  if (!defined("RACINE")){
 	$directories = explode(DIRECTORY_SEPARATOR, __FILE__);
 	$racineFinale = "";
@@ -48,7 +48,7 @@
 	}
 	define("RACINE", $racineFinale);
  }
- */
+ 
  
 // emplacement par défaut des fichiers de configuration
 if (!defined("CONFIG_DIR")) {
@@ -76,12 +76,12 @@ if (!defined("LIB_DIR")) {
 
 // emplacement par défaut des fichiers javascript
 if (!defined("JS_DIR")) {
-   define("JS",RACINE . "js");
+   define("JS_DIR",RACINE . "js");
 }
 
 // emplacement par défaut des fichiers css
 if (!defined("CSS_DIR")) {
-   define("CSS",RACINE . "css");
+   define("CSS_DIR",RACINE . "css");
 }
 
 // emplacement par défaut des pages webs

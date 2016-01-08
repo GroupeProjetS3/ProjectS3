@@ -1,6 +1,6 @@
 <?php
 require_once("../config/config_db.php");
-require_once("../config/config_base.php");
+require_once(CONFIG_DIR."/config_base.php");
 require_once(INC_DIR."/autoload.function.php");
 
 $page = new WebPage("Validation Achat des Billets");
@@ -69,7 +69,16 @@ for($i=0; $i<sizeof($quantites); $i++){
 	
 	$prixFinal+=$total;
 }
-
-$page->appendContent("<p>Total : ".number_format($prixFinal, 2 ,',','.')." €</p>");
+$page->appendContent("<hr>
+					<div id='codePromo'>
+						<input type='text' placeholder='Code Promo'/>
+						<input type='button' value='Valider'/>
+					</div>
+					<div id='codeLicence'>
+						<input type='text' placeholder='Code Licence'/>
+						<input type='button' value='Valider'/>
+					</div>
+					<hr>
+					<p>Total : ".number_format($prixFinal, 2 ,',','.')." €</p>");
 
 echo $page->toHTML();

@@ -14,15 +14,16 @@ class Webpage {
      * Constructeur
      * @param string $title Le titre de la page
      */
-    /*public function __construct($title) {
+    public function __construct($title) {
         $this->title= $title;
-        if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
+        /*if(!Member::isConnected()) { //Gérer le div d'authentification et Gérer menus annexes
             $auth = "";
             $this->options = "";
         }else {
             $auth = "";
         }
-    }*/
+		*/
+    }
     /**
      * Protéger les caractères spéciaux pouvant dégrader la page Web
      * @param string $string La chaîne à protéger
@@ -54,7 +55,7 @@ HTML
      */
     public function appendJsUrl($url) {
         $this->appendToHead(<<<HTML
-    <script type='text/javascript' src='$url'></script>
+    <script type='text/javascript' src='{$url}'></script>
 HTML
         ) ;
     }
@@ -103,6 +104,7 @@ HTML
     <html lang="fr">
     <head>
     <meta charset="utf-8">
+	<title>{$this->title}</title>
     {$this->head}
     </head>
     <header>
@@ -112,27 +114,27 @@ HTML
         </div>
 
     </header>
-    <div id="divMenu">
-        <ul id="menu">
-            <li><a href="">Accueil</a></li>
-            <li><a href="">Planning</a></li>
-            <li><a href="">Terrains</a></li>
-            <li><a href="">Billeterie</a></li>
-            {$this->menu}
-        </ul>
-        <nav>
-            <li><a href="">Acceuil</a></li>
-            <li><a href="">Planning</a></li>
-            <li><a href="">Terrain</a></li>
-            <li><a href="">Billeterie</a></li>
-            {$this->nav}
-
-        </nav>
-    </div>
     <body>
-   <div id='global'> 
-    {$this->body}
-    </div>
+		<div id="divMenu">
+			<ul id="menu">
+				<li><a href="">Accueil</a></li>
+				<li><a href="">Planning</a></li>
+				<li><a href="">Terrains</a></li>
+				<li><a href="">Billeterie</a></li>
+				{$this->menu}
+			</ul>
+			<nav>
+				<li><a href="">Accueil</a></li>
+				<li><a href="">Planning</a></li>
+				<li><a href="">Terrain</a></li>
+				<li><a href="">Billeterie</a></li>
+				{$this->nav}
+
+			</nav>
+		</div>
+		<div id="global">
+			{$this->body}
+		</div>
     </body>
 </html>
 HTML;
