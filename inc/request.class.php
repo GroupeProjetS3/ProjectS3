@@ -141,12 +141,13 @@
           $connection = Connection_DB::getInstance();
           $stmt = $connection->prepare($this->sql);
           $stmt->execute();
-          if($classe != null)
+          if($classe != null){
               $stmt->setFetchMode(PDO::FETCH_CLASS, $classe);
-          else
+          }else if($this->command() == 'SELECT'){
               $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          while($result = $stmt->fetch()) {
+	      while($result = $stmt->fetch()) {
               yield $result;
+          }
           }
       }
 
@@ -182,6 +183,7 @@
           $values = "VALUES (";
           foreach($this->params as $key => $value){
               $columns.=$key.",";
+              var_dump($value);
               $values = $value.",";
           }
           $columns = substr($columns, 0, -1).") ";
@@ -192,7 +194,7 @@
       private function updateRequest(){
           $sql = "";
           foreach($this->params as $key => $value){
-              $sql.=$key." = ".$value.",";
+              $sql.=$key." = '".str_replace("_"," ",$value)."',";
           }
           return substr($sql, 0, -1);
       }

@@ -90,15 +90,16 @@ $content.=<<<HTML
   $("#saveDiv").click(function(){
     if($(this).find("button").attr("id") == "edition"){
       $("input[type='text']").each(function(){
-	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val()+'"}';
+	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val().replace(" ", "_")+'"}';
 	$("#champ").load('../ajax/update_db.php?classe=TypeBillet&id='+$(this).attr('id')+'&data='+data);
       });
     }else{
       $("input[type='text']").each(function(){
- 	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val()+'"}';
+ 	var data = '{"'+$(this).attr('name')+'":"'+ $(this).val().replace(" ", "_")+'"}';
 	$("#champ").load('../ajax/insert_db.php?classe=TypeBillet&data='+data);
       });
     }
+    $("#champ").html("");
   $("#saveDiv").html("");
   });
 </script>

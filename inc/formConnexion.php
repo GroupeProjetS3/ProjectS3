@@ -12,7 +12,7 @@
 HTML
 );
 
-	$p->appendContent(User::loginForm('Authentification.php'));
+	$p->appendContent(Utilisateur::loginForm('../front/Authentification.php'));
 
 	echo $p->toHTML();
 

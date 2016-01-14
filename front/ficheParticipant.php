@@ -24,33 +24,25 @@
  along with this software. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
-
 require_once("../config/config_base.php");
 require_once(CONFIG_DIR."/config_db.php");
-require_once(INC_DIR."/autoload.function.php");
+require_once INC_DIR."/autoload.function.php";
 
-$content ="Update effectuée";
+$p = new Webpage("Gestion des Types de Billets");
+$p->appendCssUrl("../css/index.css");
+$p->appendJsUrl("../lib/jquery.min.js");
 
-if(isset($_GET['classe']) && $_GET['classe'] != null && isset($_GET['id']) && $_GET['id'] != null && isset($_GET['data']) && $_GET['data'] != null){
-  $request = new Request('SELECT', $_GET['classe']);
-  $request->setparams('*');
-  
-  $id = 0;
-  foreach($request->execute() as $value){
-    foreach($value as $key => $useless){
-      if(substr($key, 0,3)=="id_"){
-	$id = $key;
-      }
-    }
-  }
-  $data = json_decode($_GET['data']);
-  $request = new Request('UPDATE', $_GET['classe']);
-  $request->setparams($data);
-  $request->setConditions($id." = ".$_GET['id']);
-  foreach($request->execute() as $truc){
-    var_dump($truc);
-  }
-}else{
-  $content = "Erreur lors de l'update";
+$content ="";
+
+if(isset($_GET['id'])&& $_GET['id']!=null){
+	$request = new Request('SELECT', 'Utilisateur');
+	$request->setparams("id_user ,firstName, lastName");
+ 	$request->setConditions("id_user = ".$_GET['id']);
+ 	foreach($request->execute() as $joueur) {
+		$content .="<p>".$joueur['firstName']." ".$joueur['lastName']."</p>";
+        }
 }
-echo $content;
+
+$p->appendContent($content);
+
+echo $p->toHTML();

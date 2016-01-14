@@ -2,33 +2,33 @@
     background-image: url('tennis-balls-header.jpg');
     background-repeat:no-repeat;
     background-size: 100% 200%;
-    padding: 20px;
-    margin: 1%;
-    border: 2px solid black;
-    border-radius:7px;
+    height: 180px;
+    /*padding: 20px;*/
+    /*margin: 1%;*/
+    /*border: 2px solid black;
+    border-radius:7px;*/
 }
 
-nav{
-
+#carousel-news{
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-
-ul{
-    text-align: center;
+#navbar{
+    background-color: rgb(255, 153, 0);
+    color: black;
 }
 
-
-li{
-    display: inline-block;
-    list-style-type: none;
-    padding-right:5%;
-    padding-left:5%;
-    border-right:solid rgba(63,47,82,1) 1px;
-    margin :0px;
+.onglet{
+    color: black;
 }
 
-li:last-child{
-    border-right:none;
+#nomSite{
+    padding-left: 10%;
+    margin: auto 0px;
+}
+.image-car{
+    margin: auto;
 }
 
 #titre{
@@ -44,13 +44,11 @@ li:last-child{
 
 
 #test{
-    border: 3px solid;
     padding: 50px;
     text-align: center;
 }
 
 #prem{
-    border: 3px solid;
     padding: 200px;
     text-align: center;
 }

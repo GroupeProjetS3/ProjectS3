@@ -1,4 +1,6 @@
 <?php
+require_once "autoload.function.php";
+require_once "../config/config_db.php";
 /*
  -------------------------------------------------------------------------
  Project S3 - Gestionnaire de tournois de Tennis
@@ -29,6 +31,19 @@ require_once("autoload.function.php");
 
 class Hebergeur extends User{
 
+	public function getHebergements(){
+		$pdo = Connection_DB::getInstance();
+		$query = $pdo->prepare(<<<SQL
+			SELECT nom, description, url_image, id_adresse, id_hebergeur
+			FROM Hebergement
+			WHERE id_herbergeur = :id
+			ORDER BY nom;		
+SQL
+);
+		$query->setFetchMode(PDO::FETCH_CLASS, "Hebergement");
+		$query->bindValue(":id", $this->id);
+		return $query->fetchAll();
+	}
 }
 
 class HostUser extends User{

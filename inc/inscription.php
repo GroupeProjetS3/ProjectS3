@@ -23,15 +23,15 @@
     {
         if($pass1 != $pass2)
         {
-            header("Location: ../ajax/formulaireInscription.php?pass");
+            header("Location: ../front/formulaireInscription.php?pass");
 
         }
         elseif(valideEmail($email))
         {
-            header("Location: ../ajax/formulaireInscription.php?mail");
+            header("Location: ../front/formulaireInscription.php?mail");
         }
         elseif (validePseudo($login)) {
-            header("Location: ../ajax/formulaireInscription.php?login");
+            header("Location: ../front/formulaireInscription.php?login");
         }
         else
         {

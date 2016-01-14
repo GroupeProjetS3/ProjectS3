@@ -40,10 +40,12 @@ $navigation = AJAX_DIR."/navigation.php";
 $content = <<<HTML
     <div id="navigation"></div>
     <div id="area"></div>
+    <div id="gestion"></div>
     <script type="text/javascript">
     $(document).ready(function(){
         $("#navigation").load('../ajax/navigation.php');
         $("#area").load('../ajax/areaTournoi.php');
+        $("#gestion").load('../ajax/gestionTournoi.php');
     });
 </script>
 HTML;

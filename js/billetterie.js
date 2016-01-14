@@ -6,7 +6,6 @@ $(function(){
 			'json');
 	
 	function chargeMatchs(matchs){
-		console.log('bonjour');
 		$('<fieldset>')
 			.appendTo('#billets');
 		
@@ -61,8 +60,8 @@ $(function(){
 							$(this).parent().children('div[id^="prix"]').hide();
 						}
 					});
-					$('#typesMatch'+id_match+' select').each(function(){
-						$(this).val("").attr('selected', true);
+					$('#typesMatch'+id_match+' input[id^="quantite_"]').each(function(){
+						$(this).val("0").attr('selected', true);
 					});
 				}
 			})
@@ -71,10 +70,9 @@ $(function(){
 		$('<input>', {type:'button', value:'Valider'})
 			.appendTo('#billets')
 			.click(function(){
-				$('select').each(function(){
-					console.log($(this).val()!="")
-					if($(this).val()!=""){
-						console.log('top');
+				$('input[id^="quantite_"]').each(function(){
+					var control = parseInt($(this).val())> 0 && parseInt($(this).val()) <= parseInt($(this).attr('max'));
+					if(control){
 						$('#billets').submit();
 					}
 				})
@@ -111,15 +109,9 @@ $(function(){
 					$('<div>', {id:'quantite'+id_typeBillet})
 						.html('Quantité : ')
 						.appendTo('#typesMatch'+id_match+' #prix'+id_typeBillet);
-				
-						$('<select>', {id:'quantite_'+id_typeBillet, name:id_match+'_quantite_'+id_typeBillet})
-							.appendTo('#typesMatch'+id_match+' #quantite'+id_typeBillet);
-							
-							$('#typesMatch'+id_match+' #quantite_'+id_typeBillet).append(new Option('', ''));
-							
-							for(var j=1; j<=type.nbBilletsDispo; j++){
-								$('#typesMatch'+id_match+' #quantite_'+id_typeBillet).append(new Option(j, j));
-							}
+					
+					$('<input>', {type:'number', min:'0', max:type.nbBilletsDispo, step:'1', value:'0', id:'quantite_'+id_typeBillet, name:id_match+'_quantite_'+id_typeBillet})
+						.appendTo('#typesMatch'+id_match+' #quantite'+id_typeBillet);
 			
 			$('#typesMatch'+id_match+' #prix'+id_typeBillet).hide();
 		}
@@ -132,7 +124,7 @@ $(function(){
 				}
 				else{
 					$(this).parent().children('#prix'+id_typeBillet).hide();
-					$(this).parent().children('#prix'+id_typeBillet).children('#quantite'+id_typeBillet).children('#quantite_'+id_typeBillet).val("").attr('selected', true);
+					$(this).parent().children('#prix'+id_typeBillet).children('#quantite'+id_typeBillet).children('#quantite_'+id_typeBillet).val("0").attr('selected', true);
 				}
 			})
 		})

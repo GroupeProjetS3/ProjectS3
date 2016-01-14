@@ -1,4 +1,3 @@
-
 <?php
 class Webpage {
     private $head  = null ;
@@ -69,9 +68,10 @@ HTML
 
         public function appendBootstrap($url){
       $this->appendToHead(<<<HTML
-  <script type='text/javascript' src='{$url}/dist/js/bootstrap.min.js'></script>
-  <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" type="text/css" href="{$url}/dist/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 HTML
       ) ;
     }
@@ -103,49 +103,48 @@ HTML
         <!DOCTYPE html>
     <html lang="fr">
     <head>
-    <meta charset="utf-8">
-	<title>{$this->title}</title>
-	{$this->head}
-	<script type='text/javascript' src='../bootstrap/dist/js/bootstrap.min.js'></script>
-	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.css">
+        <meta charset="utf-8">
+    	<title>{$this->title}</title>
+    	{$this->head}
     </head>
     <header>
-        <div id ="divHaut">
-        <div class="row">
-           <div class="col-xs-3">
-	     <h1>Site</h1>
-	   </div>
-	    <div class="col-xs-4">
-           {$this->header}
-           </div>
-           <div class="col-xs-5">
+        <div id ="divHaut" class="jumbotron">
+            <div class="row">
+                <div class="col-xs-5">
+        	        <h1 id="nomSite">Tournoi de tennis</h1>
+        	    </div>
+        	    <div class="col-xs-2">
+                   {$this->header}
+                </div>
+                <div class="col-xs-5">
 HTML
 ;
-	     $html .= User::loginForm('Authentification.php');
-	     $html .= <<<HTML
-	     <a href="../front/formulaireInscription.php">Inscription</a>
-	   </div>
-	   
-          </div>
+if(Utilisateur::isConnected()){
+$html.=Utilisateur::disconnectForm($_SERVER['PHP_SELF']);
+}else{
+    $html .= Utilisateur::loginForm('../front/Authentification.php');}
+    $html .= <<<HTML
+    	           <a href="../front/formulaireInscription.php">Inscription</a>
+    	        </div>
+            </div>
         </div>
 
+        <ul class="nav nav-tabs nav-justified" id="navbar">
+            <li role="presentation" class="active"><a class="onglet" href="http://infs3_prj13/index.php">Accueil</a></li>
+            <li role="presentation"><a class="onglet" href="#">Horaires</a></li>
+            <li role="presentation"><a class="onglet" href="#">Terrains</a></li>
+            <li role="presentation"><a class="onglet" href="../front/billetterie.php">Billetterie</a></li>
+            <li role="presentation"><a class="onglet" href="#">Resultats</a></li>
+            {$this->menu}
+        </ul>
     </header>
     <body>
-		<div id="divMenu">
-			<ul id="menu">
-				<li><a href="../index.php">Accueil</a></li>
-				<li><a href="#">Horaires</a></li>
-				<li><a href="#">Terrains</a></li>
-				<li><a href="../front/billetterie.php">Billetterie</a></li>
-				<li><a href="#">Resultats</a></li>
-				{$this->menu}
-			</ul>
-		</div>
+		
+
 		<div id="global">
 			{$this->body}
 		</div>
+
     </body>
 </html>
 HTML;
